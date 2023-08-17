@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Sidebar from "./component/Sidebar";
+import ProfileDetail from "./component/ProfileDetail";
+import Des from "./component/Des";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{display:"flex", flexWrap:"nowrap",
+            //width:"100%",
+         //   height:"560px",
+            
+    }}>
+      <Sidebar></Sidebar>
+      
+  <Des></Des> 
+  <ProfileDetail></ProfileDetail> 
     </div>
   );
 }
