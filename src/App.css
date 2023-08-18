@@ -1,9 +1,10 @@
 .btn_sidebar{
   margin-top: 10px;
-  width: 150px;
+  width: 200px;
   height: 30px;
-  margin-left: -15px;
-  border: none;
+  margin-left: -40px;
+  border: none;  
+  background-color: white !important;
   /* background-color: ; */
 }
 
@@ -13,14 +14,61 @@
   height: 30px;
   margin-left: 20px;
   border: none;
+  background-color: white;
 }
 
 .dess_item{
   margin-left: -39px;
-  width: 237px;
-  height: 120px;
-  background-color: aqua;
+  width: 230px;
+  height: 140px;
+  background-color: white;
   justify-content: space-between;
   
   list-style-type: none;
+}
+.dess_itempic{
+  margin-left: -39px;
+  margin-top: 40px;
+  width: 230px;
+  height: 110px;
+  background-color: white;
+  justify-content: space-between;
+  border-radius:0px 0px 0px 0px ;
+
+  list-style-type: none;
+}
+
+
+.icon_sidebar{
+  justify-content: start;
+  align-items: start;
+  margin-left: -170px;
+  margin-top: 5px;
+}
+
+.icon_sidebar_p{
+  margin-top: -15px;
+  align-items: start;
+  justify-content: center;
+  text-align: left;
+  margin-left: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.btnAdd_sidebar_p{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  margin-top: -18px;
+  margin-left: -30px;
+}
+#abc123{
+  background-color: red !important;
+}
+
+dess_itemh1{
+  font-size: large;
+  color: yellowgreen;
 }
