@@ -3,6 +3,9 @@ import { FaPersonDress } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaShoppingBag } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 
 function Sidebar() {
   return (
@@ -11,10 +14,10 @@ function Sidebar() {
         style={{
           borderStyle: "solid",
           borderWidth: "0px",
-          height: "560px",
           width: "250px",
-          // background:"red",
-          marginTop: "0px",
+            background:"#f7faff",
+          marginTop: "-30px",
+          height: "530px"
         }}
       >
         <div
@@ -26,37 +29,28 @@ function Sidebar() {
             marginLeft: "20px",
             marginTop: "0px",
             borderRadius: "20px 0px 0px 0px",
-            marginTop: "20px",
+            marginTop: "0px",
             background: "white",
           }}
         >
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginright: "20px",
-              paddingRight: "30px",
-              marginTop: "0px",
-            }}
-          >
-            <button
-              className="btn_sidebar"
-              id="abc123"
-              type="button"
-              style={{ marginTop: "30px", background: "red " }}
-            >
-              <FaPersonDress className="icon_sidebar"></FaPersonDress>
-              <p className="icon_sidebar_p">Customer</p>
-            </button>
-            <button className="btn_sidebar" type="button">
-              <AiOutlineShoppingCart className="icon_sidebar"></AiOutlineShoppingCart>
-              <p className="icon_sidebar_p">Product</p>
-            </button>
-            <button className="btn_sidebar" type="button">
-              <FaShoppingBag className="icon_sidebar"></FaShoppingBag>
-              <p className="icon_sidebar_p">Product Order</p>
-            </button>
-          </ul>
+         
+
+          <div class="d-grid gap-3 mt-5" style={{ border: "none" }}>
+            <Button variant="outline-danger active" style={{ border: "none" }}>
+              {" "}
+              <FaPersonDress></FaPersonDress>Customer
+            </Button>{" "}
+            <Button variant="outline-danger" style={{ border: "none" }}>
+              <AiOutlineShoppingCart
+                style={{ marginLeft: "-10px" }}
+              ></AiOutlineShoppingCart>
+              Product
+            </Button>{" "}
+            <Button variant="outline-danger" style={{ border: "none" }}>
+              <FaShoppingBag style={{ marginLeft: "10px" }}> </FaShoppingBag>{" "}
+              Customer
+            </Button>{" "}
+          </div>
         </div>
 
         <div
@@ -71,13 +65,13 @@ function Sidebar() {
             marginTop: "20px",
           }}
         >
-          <div>
-            <button className="btnAdd_sidebar" type="button">
-              <VscAccount
-                style={{ marginLeft: "-150px", marginTop: "10px",fontWeight:"bold"}}
-              ></VscAccount>
-              <p className="btnAdd_sidebar_p">Add Account</p>
-            </button>
+          <div >
+            <button className="btnAdd_sidebar btn-sm" type="button"></button>
+            <Button variant="outline-primary" style={{border:"none"}}>
+              {" "}
+              <VscAccount style={{ marginRight: "10px" }}></VscAccount>Add
+              Account
+            </Button>{" "}
           </div>
         </div>
       </div>
