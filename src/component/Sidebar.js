@@ -36,19 +36,20 @@ function Sidebar() {
          
 
           <div class="d-grid gap-3 mt-5" style={{ border: "none" }}>
-            <Button variant="outline-danger active" style={{ border: "none" }}>
+            <Button variant="outline-danger " style={{ border: "none" }}>
               {" "}
               <FaPersonDress></FaPersonDress>Customer
             </Button>{" "}
-            <Button variant="outline-danger" style={{ border: "none" }}>
+            <Button variant="outline-danger active" style={{ border: "none" }}>
               <AiOutlineShoppingCart
                 style={{ marginLeft: "-10px" }}
               ></AiOutlineShoppingCart>
               Product
             </Button>{" "}
+     
             <Button variant="outline-danger" style={{ border: "none" }}>
               <FaShoppingBag style={{ marginLeft: "10px" }}> </FaShoppingBag>{" "}
-              Customer
+              Shopping
             </Button>{" "}
           </div>
         </div>

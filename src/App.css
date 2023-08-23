@@ -72,3 +72,17 @@ dess_itemh1{
   font-size: large;
   color: yellowgreen;
 }
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr  ;
+}
+
+/* Styling */
+.box {
+  background: #ccc;
+   text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+}

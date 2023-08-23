@@ -9,15 +9,16 @@ function Topbar() {
   return (
     <div style={{backgroundColor:"yellow"}}>
         <Navbar bg="primary" data-bs-theme="dark" >
-        <Container>
-          <Navbar.Brand href="#home">Product Management</Navbar.Brand>
+        <Container> 
+          <Navbar.Brand href="#home">Product Management</Navbar.Brand> 
           <Nav className="me-auto">
-            
-
-
-          </Nav>
+        </Nav>
         </Container>
       </Navbar>
+      <div>
+
+      
+      </div>
     </div>
   )
 }
