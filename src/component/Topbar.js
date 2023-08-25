@@ -7,10 +7,12 @@ import Col from 'react-bootstrap/Col';
 
 function Topbar() {
   return (
-    <div style={{backgroundColor:"yellow"}}>
+    <div
+    //  style={{backgroundColor:""}}
+     >
         <Navbar bg="primary" data-bs-theme="dark" >
         <Container> 
-          <Navbar.Brand href="#home">Product Management</Navbar.Brand> 
+          <Navbar.Brand href="#home"><h4>Product Management</h4></Navbar.Brand> 
           <Nav className="me-auto">
         </Nav>
         </Container>

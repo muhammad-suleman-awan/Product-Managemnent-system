@@ -4,40 +4,72 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+import Form from "react-bootstrap/Form"; 
 
 import { Text, View } from "react";
 
-const Des = ({ myData }) => {
+const Des = ({ myData,childToParent }) => {
   const [showModal, setShowModal] = useState(false);
   // console.log("Props in clid comp myDatamyData  myData ",myData);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState(" ");
+  const [quantity, setQuantity] = useState(0);
+  const data = "This is data from Child Component to the Parent Component."
 
-  function StaticExample() {
+  function StaticExample(item) {
+    // console.log("ddata shhpe in item  -----  ",item);
     setShowModal(true);
+    setName(item.name);
+    setEmail(item.email);
+    setQuantity(item.instock_quantity);
+    setDescription(item.description);
   }
-  const handleClose = () => setShowModal(false);
+  const handleClose = (
+
+  ) => setShowModal(false);
   const handleShow = () => setShowModal(true);
   {
-    console.log("my data", myData);
+    // console.log("my data", myData);
   }
+ 
+  // function handleChange(evt) {
+  //   setState({ Name: evt.target.value });
+  //   setState({email: evt.target.value});
+  //   console.log("Name ",state)
+  // }
 
+  const [state, setState] = React.useState({
+    username: "",
+    email: "",
+    quantity:""
+  })
+  function handleChange(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value
+    });
+    console.log("Data can get in Form  ",state)
+  }
   return (
-    <div style={{ marginLeft: "100px" }}>
+    <div style={{ backgroundColor: "rgb(228, 235, 829)", width: "450%",height:"auto",marginLeft:"0px" }}>
       <div style={{ display: "flex" }}>
         <div className="mt-5 ">
           <Card
             style={{
-              width: "10rem",
+              width: "14rem",
+
               border: "none",
-              backgroundColor: "#f7faff",
-              marginLeft: "15px",
-              marginTop: "-30px",
+              backgroundColor: "rgb(228, 235, 829)",
+              marginLeft: "5px",
+              marginTop: "-40px",
             }}
           >
             <ListGroup variant="flush">
               <ListGroup.Item
                 className="  font-weight-bold text-uppercase text-secondary w-100 h4"
-                style={{ backgroundColor: "#f7faff" }}
+                style={{ backgroundColor: "rgb(228, 235, 829)" }}
               >
                 PRODUCT
               </ListGroup.Item>
@@ -46,61 +78,10 @@ const Des = ({ myData }) => {
         </div>
       </div>
 
-      {/* {console.log("I AM HERE! IN DATA ",myData)} */}
-      {/* <div
-        style={{
-          marginLeft: "10px",
-          background: "#f7faff",
-          width: "810px",
-          gap: "2rem",
-          display: "grid",
-          gridGap: "10px",
-          gridTemplateColumns: " 1fr 1fr 1fr",
-          gridTemplateRows: "1fr 1fr",
-        }}
-      >
-        {myData &&
-          myData.length > 0 &&
-          myData.map((record, index) => {
-            return (
-              <div key={index}>
-                <div class="gap-2 " key={record.id}>
-                  <div>
-                    <Card id="" style={{ width: "14rem", height: "12rem" }}>
-                      <Card.Body>
-                        <Card.Title class="h1 text-center">
-                          <h3 style={{ textTransform: "uppercase" }}>
-                            {record.name && record.name.charAt(0)}
-                          </h3>
-                        </Card.Title>
-                        <Card.Text>
-                          <h5 style={{ marginTop: "30px" }}>{record.name}</h5>
-                          <p> {record.description} </p>
-                        </Card.Text>
-                        <div style={{ marginTop: "-10px" }}>
-                          <Card.Link href="#">{record.price}</Card.Link>
-                          <button
-                            onClick={StaticExample()}
-                            style={{ border: "none", backgroundColor: "white" }}
-                          >
-                            {" "}
-                            <Card.Link href="#" style={{ marginLeft: "100px" }}>
-                              +
-                            </Card.Link>
-                          </button>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-      </div> */}
       <div
         style={{
           marginLeft: "10px",
-          background: "#f7faff",
+          // background: "#f7faff",
           width: "810px",
           gap: "2rem",
           display: "grid",
@@ -123,11 +104,11 @@ const Des = ({ myData }) => {
                     </Card.Title>
                     <Card.Text>
                       <h5 style={{ marginTop: "30px" }}>{item.name}</h5>
-                      <p> {item.description} </p>
+                      <p style={{ marginTop: "10px" , fontSize: "16px", }}> {item.description} </p>
                     </Card.Text>
                     <div
                       style={{
-                        marginTop: "-10px",
+                        marginTop: "0px",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
@@ -135,22 +116,49 @@ const Des = ({ myData }) => {
                     >
                       <Button
                         style={{
+                          height:"20px",
                           backgroundColor: "white",
                           border: "none",
                           color: "Black",
+                          justifyContent: "left",
                         }}
                       >
-                        {item.price}
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            marginTop: "0px",
+                            justifyContent: "left",
+                            fontWeight: "bold",
+                            marginLeft:"-10px"
+                            
+                          }}
+                        >
+                          Rs. {item.price}
+                        </p>
                       </Button>
                       <Button
                         style={{
                           backgroundColor: "white",
                           border: "none",
                           color: "Black",
+                          width: "30px",
+                          height: "30px",
+                        
                         }}
-                        onClick={() => StaticExample()}
+                        onClick={() => StaticExample(item)}
                       >
-                        <h3>+</h3>
+                        <h3
+                          style={{
+                            color: "blue",
+                            width: "20px",
+                            height: "30px",
+                            borderBottom: "solid ",
+                            marginTop:"-5px", 
+                            marginLeft:"-10px"
+                          }}
+                        >
+                          +
+                        </h3>
                       </Button>
                     </div>
                   </Card.Body>
@@ -165,60 +173,94 @@ const Des = ({ myData }) => {
           className="modal"
           style={{ display: "block", position: "initial" }}
         >
-          <Button variant="primary" onClick={handleShow}>
+          {/* <Button variant="primary" onClick={handleShow}>
             Launch demo modal
-          </Button>
-          {myData &&
-          myData.length > 0 &&
-          myData.map((item, index) => (
-            <div key={index}>
-          <Modal show={setShowModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>My Order</Modal.Title>
+          </Button> */}
+
+          <Modal show={setShowModal} onHide={handleClose} >
+
+            <Modal.Header
+              closeButton
+              style={{backgroundColor:"rgb(13, 110, 253)"}}
+              
+            >
+              <Modal.Title style={{color:"white"}}>My Order</Modal.Title>
             </Modal.Header>
-            <Card>
-              <Card.Body>
+            <Card >
+              <Card.Body style={{height:"420px"}}>
                 <ListGroup variant="flush">
-                  <Form>
-                    <text>Name</text>
-                    <Form.Control type="name" placeholder="Name" />
-                    <text>Email</text>
-                    <Form.Control
-                      type="string"
-                      placeholder="Email"
-                      style={{ marginTop: "0px" }}
+                  <Form  style={{marginTop:"-15px"}} onsubmit="myFunction()">
+                    <text style={{fontWeight:"bold"}}>Name</text>
+                    <Form.Control  style={{width:"350px",
+                      marginTop:"5px",
+                      borderColor:"black",
+                      marginBottom:"5px"}}
+
+                        
+                      placeholder="Enter Full Name"
+                      type="text"
+          name="username"
+          value={state.username}
+          onChange={handleChange}         
+                     
+                 
                     />
-                    <text>Product Quantity</text>
+                    <text style={{fontWeight:"bold", }}>Email</text>
                     <Form.Control
-                      type="string"
-                      placeholder="Quantity"
-                      style={{ marginTop: "0px" }}
+                     style={{width:"350px",
+                      marginTop:"10px",
+                      borderColor:"black",
+                      marginBottom:"5px"}}
+
+                   //   type="string"
+                      placeholder="Enter Email"
+                      ype="text"
+          name="email"
+          value={state.email}
+          onChange={handleChange}
+                      
                     />
+                    <text style={{fontWeight:"bold"}}>Product Quantity</text>
+                    <Form.Control style={{width:"350px",
+                      marginTop:"10px",
+                      marginBottom:"5px",
+                      borderColor:"black"}}
+                      type="string"
+                      placeholder="Enter Quantity"
+                      name="quantity"
+                      value={state.quantity}
+                      onChange={handleChange}
+                  
+                    />
+                      <Modal.Footer style={{marginTop:"130px",marginRight:"auto"}}>
+              <Button variant="secondary" onClick={handleClose} style={{fontWeight:"bold"}}>
+                Close
+              </Button>
+              <Button type="submit" value="Submit" variant="outline-primary active" onClick={handleClose} style={{fontWeight:"bold"}}>  
+                {" "}
+                Confrim Order
+              </Button> 
+            </Modal.Footer>
                   </Form>
-                  <text style={{ fontWeight:"bold"}}> Product Name  </text>
-                    <p style={{fontSize:'18px', }}> {item.name}</p>
-                    <text style={{ fontWeight:"bold"}}> Product Description</text>
-                    <p style={{fontSize:'18px', }}> {item.description}
-
-
-</p>
+              <div style={{marginTop:"-200px"}}>
+                  <text style={{ fontWeight: "bold" }}> Product Name </text>
+                  <p style={{ fontSize: "18px" }}> {name}</p>
+                  <text style={{ fontWeight: "bold" }}>
+                    {" "}
+                    Product Description
+                  </text>
+                  <p style={{ fontSize: "18px" }}> {description}</p>
+                  </div>
                 </ListGroup>
               </Card.Body>
             </Card>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="outline-success" onClick={handleClose}>
-                {" "}
-                Confrim Order
-              </Button>{" "}
-            </Modal.Footer>
+          
           </Modal>
-          </div>
-          ))}
         </div>
       )}
+
+  
+
     </div>
   );
 };

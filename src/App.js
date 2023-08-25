@@ -27,21 +27,36 @@ function App() {
       });
   };
 
+
+    const showcustomerdetail = () => {
+    API.get("/showcustomer")
+      .then((res) => {
+        console.log("res is thiss  showcustomer", res.data);
+        setMyData(res?.data?.data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
   // using Promises
   useEffect(() => {
     getData();
-  }, []);
+   }, []);
+   
+ 
 
   return (
-    <div style={{ backgroundColor: "#f7faff" }}>
+    <div 
+    // style={{ backgroundColor: "#f7faff" }}
+    >
       <Topbar></Topbar>
       <div
         style={{
           display: "flex",
           flexWrap: "nowrap",
-          width: "20%",
+          width: "1265",
           height: "500px",
-          backgroundColor: "#f7faff",
+          // backgroundColor: "#f7faff",
         }}
       >
         <Sidebar></Sidebar>
