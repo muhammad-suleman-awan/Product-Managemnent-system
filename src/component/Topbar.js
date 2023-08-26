@@ -8,11 +8,11 @@ import Col from 'react-bootstrap/Col';
 function Topbar() {
   return (
     <div
-    //  style={{backgroundColor:""}}
+      style={{backgroundColor:"white"}}
      >
-        <Navbar bg="primary" data-bs-theme="dark" >
+        <Navbar  data-bs-theme="dark" >
         <Container> 
-          <Navbar.Brand href="#home"><h4>Product Management</h4></Navbar.Brand> 
+          <Navbar.Brand href="#home"><h4 style={{color:"black"}}>Product Management</h4></Navbar.Brand> 
           <Nav className="me-auto">
         </Nav>
         </Container>

@@ -10,11 +10,23 @@ import Des from "./component/Des";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Topbar from "./component/Topbar";
 import API from "./axios.jsx";
-import AddAccount from "./component/AddAccount";
+// import AddAccount from "./component/AddAccount";
 
 function App() {
   const [myData, setMyData] = useState([]);
   const [isError, setIsError] = useState("");
+  const [Data, setData] = useState({});
+
+  {
+    console.log(" Data get in APA", Data);
+  }
+  const [formData, setFormData] = useState({
+    name: '',
+    
+    // Add other fields as needed
+  });
+
+  const [inputData, setInputdata] = useState(Data);
 
   const getData = () => {
     API.get("/show")
@@ -27,26 +39,30 @@ function App() {
       });
   };
 
-
-    const showcustomerdetail = () => {
-    API.get("/showcustomer")
-      .then((res) => {
-        console.log("res is thiss  showcustomer", res.data);
-        setMyData(res?.data?.data);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    // Send POST request
+    API.post('/addProduct', formData)
+      .then((response) => {
+        console.log('Post successful:', response.data);
+        // Optionally, you can update state or perform other actions after successful post
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error('Error posting data:', error);
+        // Handle error
       });
   };
-  // using Promises
+
+
   useEffect(() => {
-    getData();
-   }, []);
-   
+    getData(); 
+  }, []);
  
+  
 
   return (
-    <div 
+    <div
     // style={{ backgroundColor: "#f7faff" }}
     >
       <Topbar></Topbar>
@@ -66,7 +82,7 @@ function App() {
 
         {/* <AddAccount></AddAccount> */}
 
-        <Des myData={myData}></Des>
+        <Des myData={myData} setData={setData}></Des>
       </div>
     </div>
   );

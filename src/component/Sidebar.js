@@ -15,7 +15,7 @@ function Sidebar() {
           borderStyle: "solid",
           borderWidth: "0px",
           width: "350px",
-           background:"rgb(228, 235, 829)",
+           background:"rgba(248,251,255,255)", 
           marginTop: "0px",
           height: "500px",marginLeft:"0px"
       
@@ -40,16 +40,16 @@ function Sidebar() {
          
 
           <div  class="d-grid gap-3 mt-5" style={{ border: "none" ,width:"fit-content" }}  >
-            <Button variant="outline-primary " style={{ border: "none",fontSize:"14px",fontWeight:"bold", marginInline:"20px", }}>
+            <Button variant="outline-danger " style={{ border: "none",fontSize:"14px",fontWeight:"bold", marginInline:"20px", }}>
               {" "}
               <FaPersonDress></FaPersonDress>Customer
             </Button>{" "}
-            <Button variant="outline-primary active" style={{ border: "none",fontSize:"14px",fontWeight:"bold", marginInline:"20px", }}>
+            <Button variant="outline-danger active" style={{ border: "none",fontSize:"14px",fontWeight:"bold", marginInline:"20px", }}>
               {" "}
               <AiOutlineShoppingCart></AiOutlineShoppingCart>Product
             </Button>{" "}
              
-            <Button variant="outline-primary" style={{ border: "none" ,fontSize:"14px",fontWeight:"bold", marginInline:"20px"}}>
+            <Button variant="outline-danger" style={{ border: "none" ,fontSize:"14px",fontWeight:"bold", marginInline:"20px"}}>
               <FaShoppingBag style={{ marginLeft: "10px" }}> </FaShoppingBag>{" "}
               Shopping
             </Button>{" "}
