@@ -7,10 +7,11 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 import { Text, View } from "react";
+import axios from "axios";
 
 const Des = ({ myData, childToParent, setData }) => {
   const [showModal, setShowModal] = useState(false);
-// console.log("Props in clid comp myDatamyData  myData ",myData);
+  // console.log("Props in clid comp myDatamyData  myData ",myData);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState(" ");
@@ -18,9 +19,9 @@ const Des = ({ myData, childToParent, setData }) => {
 
   const setdataintoparents = () => {
     setData({
-      username: name,
-      email: email,
-      quantity: quantity,
+      username:  state.username,
+      email:  state.email,
+      quantity:  state.quantity,
     });
   };
   useEffect(() => {
@@ -37,32 +38,37 @@ const Des = ({ myData, childToParent, setData }) => {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  {
-    // console.log("my data", myData);
-  }
-
-  // function handleChange(evt) {
-  //   setState({ Name: evt.target.value });
-  //   setState({email: evt.target.value});
-  //   console.log("Name ",state)
-  // }
 
   const [state, setState] = React.useState({
     username: "",
     email: "",
     quantity: "",
   });
+
   function handleChange(evt) {
     const value = evt.target.value;
     setState({
       ...state,
       [evt.target.name]: value,
     });
-    console.log("Data can get in Form  ", state);
+    // alert("The form was submitted");
+    console.log("Data can get in Form in Des component");
   }
-  function myFunction() {
-    alert("The form was submitted");
-  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      username: state.username,
+
+      email: state.email,
+      quantity: state.quantity,
+    }; 
+    handleClose();
+ 
+  };
+
+   
   return (
     <div
       style={{
@@ -72,8 +78,10 @@ const Des = ({ myData, childToParent, setData }) => {
         marginLeft: "0px",
       }}
     >
- 
-      <div style={{marginLeft:"10px"}}>  <h1>Product</h1></div>
+      <div style={{ marginLeft: "10px" }}>
+        {" "}
+        <h1>Product</h1>
+      </div>
       <div
         style={{
           marginLeft: "10px",
@@ -86,7 +94,6 @@ const Des = ({ myData, childToParent, setData }) => {
           gridTemplateRows: "1fr 1fr",
         }}
       >
-    
         {myData &&
           myData.length > 0 &&
           myData.map((item, index) => (
@@ -176,63 +183,57 @@ const Des = ({ myData, childToParent, setData }) => {
           </Button> */}
 
           <Modal show={setShowModal} onHide={handleClose}>
-            <Modal.Header
-              closeButton
-              style={{ backgroundColor: "#dc3545" }}
-            >
+            <Modal.Header closeButton style={{ backgroundColor: "#dc3545" }}>
               <Modal.Title style={{ color: "white" }}>My Order</Modal.Title>
             </Modal.Header>
             <Card>
-              <Card.Body style={{ height: "420px" }}>
+              <Card.Body style={{ height: "435px" }}>
                 <ListGroup variant="flush">
-                  <form>
-                    <Form style={{ marginTop: "-15px" }}>
-                      <text style={{ fontWeight: "bold" }}>Name</text>
-                      <Form.Control
-                        style={{
-                          width: "350px",
-                          marginTop: "5px",
-                          borderColor: "black",
-                          marginBottom: "5px",
-                        }}
-                        placeholder="Enter Full Name"
-                        type="text"
-                        name="username"
-                        value={state.username}
-                        onChange={handleChange}
-                      />
-                      <text style={{ fontWeight: "bold" }}>Email</text>
-                      <Form.Control
-                        style={{
-                          width: "350px",
-                          marginTop: "10px",
-                          borderColor: "black",
-                          marginBottom: "5px",
-                        }}
-                        //   type="string"
-                        placeholder="Enter Email"
-                        ype="text"
-                        name="email"
-                        value={state.email}
-                        onChange={handleChange}
-                      />
-                      <text style={{ fontWeight: "bold" }}>
-                        Product Quantity
-                      </text>
-                      <Form.Control
-                        style={{
-                          width: "350px",
-                          marginTop: "10px",
-                          marginBottom: "5px",
-                          borderColor: "black",
-                        }}
-                        type="string"
-                        placeholder="Enter Quantity"
-                        name="quantity"
-                        value={state.quantity}
-                        onChange={handleChange}
-                      />
-                    </Form>
+                  <form onSubmit={handleSubmit}>
+                    <text style={{ fontWeight: "bold" }}>Name</text>
+                    <Form.Control
+                      style={{
+                        width: "350px",
+                        marginTop: "5px",
+                        borderColor: "black",
+                        marginBottom: "5px",
+                      }}
+                      placeholder="Enter Full Name"
+                      type="text"
+                      name="username"
+                      value={state.username}
+                      onChange={handleChange}
+                    />
+                    <text style={{ fontWeight: "bold" }}>Email</text>
+                    <Form.Control
+                      style={{
+                        width: "350px",
+                        marginTop: "10px",
+                        borderColor: "black",
+                        marginBottom: "5px",
+                      }}
+                      //   type="string"
+                      placeholder="Enter Email"
+                      ype="text"
+                      name="email"
+                      value={state.email}
+                      onChange={handleChange}
+                    />
+                    <text style={{ fontWeight: "bold" }}>Product Quantity</text>
+                    <Form.Control
+                      style={{
+                        width: "350px",
+                        marginTop: "10px",
+                        marginBottom: "5px",
+                        borderColor: "black",
+                      }}
+                      type="string"
+                      placeholder="Enter Quantity"
+                      name="quantity"
+                      value={state.quantity}
+                      onChange={handleChange}
+                    />
+                    {/* </Form> */}
 
                     <div>
                       <text style={{ fontWeight: "bold" }}> Product Name </text>
@@ -240,9 +241,7 @@ const Des = ({ myData, childToParent, setData }) => {
                       <text style={{ fontWeight: "bold" }}>
                         {" "}
                         Product Description
-                        
                       </text>
-{                  console.log("my data", description)}
                       <p style={{ fontSize: "18px" }}> {description}</p>
                     </div>
                     <Modal.Footer style={{ marginRight: "auto" }}>
@@ -257,7 +256,7 @@ const Des = ({ myData, childToParent, setData }) => {
                         type="submit"
                         value="Submit"
                         variant="outline-danger active"
-                        onClick={handleClose}
+                        // onClick={handleClose}
                         style={{ fontWeight: "bold" }}
                       >
                         {" "}
