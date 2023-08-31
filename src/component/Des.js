@@ -5,28 +5,33 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-
 import { Text, View } from "react";
 import axios from "axios";
+const Des = ({ myData, childToParent, setData, 
+  sendDataToParent,dataSend }) => {
 
-const Des = ({ myData, childToParent, setData }) => {
+  const [dataToSend, setDataToSend] = useState('');
+
+  const handleButtonClick= ()=>{
+  
+  }
+
   const [showModal, setShowModal] = useState(false);
   // console.log("Props in clid comp myDatamyData  myData ",myData);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState(" ");
   const [quantity, setQuantity] = useState(0);
-
-  const setdataintoparents = () => {
-    setData({
-      username:  state.username,
-      email:  state.email,
-      quantity:  state.quantity,
-    });
-  };
-  useEffect(() => {
-    setdataintoparents();
-  }, [name, email, quantity]);
+  // const setdataintoparents = () => {
+  //   setData({
+  //     username: state.username,
+  //     email: state.email,
+  //     quantity: state.quantity,
+  //   });
+  // };
+  // useEffect(() => {
+  //   setdataintoparents();
+  // }, [name, email, quantity]);
 
   function StaticExample(item) {
     // console.log("ddata shhpe in item  -----  ",item);
@@ -35,7 +40,6 @@ const Des = ({ myData, childToParent, setData }) => {
     setQuantity(item.instock_quantity);
     setDescription(item.description);
   }
-
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
@@ -45,30 +49,36 @@ const Des = ({ myData, childToParent, setData }) => {
     quantity: "",
   });
 
+// console.log("In State Variable " ,state);
   function handleChange(evt) {
     const value = evt.target.value;
     setState({
       ...state,
       [evt.target.name]: value,
     });
-    // alert("The form was submitted");
     console.log("Data can get in Form in Des component");
   }
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const data = {
       username: state.username,
-
       email: state.email,
       quantity: state.quantity,
-    }; 
+    };
+    console.log("data", data);
     handleClose();
- 
+    // sendDataToParent(data);
   };
 
-   
+  //   useEffect(() => {
+//     // Call the parent's callback function to send data
+//     onDataReceived(dataToSend);
+//   }, [dataToSend, onDataReceived]);
+
+
+  useEffect (()=>{
+    dataSend(state);
+  },[state,dataSend])
   return (
     <div
       style={{
@@ -178,10 +188,6 @@ const Des = ({ myData, childToParent, setData }) => {
           className="modal"
           style={{ display: "block", position: "initial" }}
         >
-          {/* <Button variant="primary" onClick={handleShow}>
-            Launch demo modal
-          </Button> */}
-
           <Modal show={setShowModal} onHide={handleClose}>
             <Modal.Header closeButton style={{ backgroundColor: "#dc3545" }}>
               <Modal.Title style={{ color: "white" }}>My Order</Modal.Title>

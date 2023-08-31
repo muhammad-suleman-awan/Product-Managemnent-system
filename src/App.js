@@ -14,7 +14,12 @@ function App() {
   const [isError, setIsError] = useState("");
   const [data, setData] = useState({});
 
- 
+  // const [receivedData, setReceivedData] = useState('');
+  //call backfunction to receieved data from child
+  // const receievedDataFromChild = (data) =>{
+  //   setReceivedData(data);
+  //   console.log("receievedDataFromChild......... ",receivedData )
+  // } 
   const getData = () => {
     API.get("/show")
       .then((res) => {
@@ -25,17 +30,25 @@ function App() {
         console.log("error", error);
       });
   };
+  const postData =()=>{
+    API.post("/addProduct")
+    .then((response) => {
+      console.log(response);
+    }).catch((err)=>{console.log(err)});
 
-
-
-
+  }
   useEffect(() => {
     getData();
-    {
-      alert("R u n g f g f g");
-      console.log("Data get in App component",data);
-    }
+ 
   }, []);
+
+
+     const [receivedData1, setReceivedData1] = useState(null);
+
+    const handleChildData1 = (data) => {
+      setReceivedData1(data);
+      console.log("Hello Data Received in Parents",data)
+    };
   return (
     <div
      >
@@ -50,7 +63,14 @@ function App() {
         }}
       >
         <Sidebar></Sidebar> 
-        <Des myData={myData} setData={setData}></Des>
+        <Des myData={myData} setData={setData} 
+        
+        // sendDataToParent={receievedDataFromChild}
+        
+        dataSend={handleChildData1} 
+        >
+
+        </Des>
          
       </div>
     </div>
