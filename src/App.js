@@ -19,7 +19,7 @@ function App() {
   // const receievedDataFromChild = (data) =>{
   //   setReceivedData(data);
   //   console.log("receievedDataFromChild......... ",receivedData )
-  // } 
+  // }
   const getData = () => {
     API.get("/show")
       .then((res) => {
@@ -27,31 +27,36 @@ function App() {
         setMyData(res?.data?.data);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
       });
   };
-  const postData =()=>{
-    API.post("/addProduct")
-    .then((response) => {
-      console.log(response);
-    }).catch((err)=>{console.log(err)});
 
-  }
   useEffect(() => {
     getData();
- 
   }, []);
 
+  const [receivedData1, setReceivedData1] = useState(null);
 
-     const [receivedData1, setReceivedData1] = useState(null);
+  // const postData = () => {
 
-    const handleChildData1 = (data) => {
-      setReceivedData1(data);
-      console.log("Hello Data Received in Parents",data)
-    };
+  //   API.post("/addProduct",data)
+  //     .then((response) => {
+  //       console.log("response", response);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // };
+
+ const handleChildData1 = (data) => {
+  //   setReceivedData1(data);
+  // //   console.log("Hello Data Received in Parents", data);
+  // postData();
+  
+ };
+
   return (
-    <div
-     >
+    <div>
       <Topbar></Topbar>
       <div
         style={{
@@ -62,16 +67,14 @@ function App() {
           // backgroundColor: "#f7faff",
         }}
       >
-        <Sidebar></Sidebar> 
-        <Des myData={myData} setData={setData} 
-        
-        // sendDataToParent={receievedDataFromChild}
-        
-        dataSend={handleChildData1} 
-        >
+        <Sidebar></Sidebar>
+        <Des
+          myData={myData}
+          setData={setData}
+          // sendDataToParent={receievedDataFromChild}
 
-        </Des>
-         
+          dataSend={handleChildData1}
+        ></Des>
       </div>
     </div>
   );

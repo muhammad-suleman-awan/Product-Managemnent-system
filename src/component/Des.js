@@ -7,38 +7,30 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { Text, View } from "react";
 import axios from "axios";
-const Des = ({ myData, childToParent, setData, 
-  sendDataToParent,dataSend }) => {
+import API from "../axios";
+const Des = ({
+  myData,
+  childToParent,
+  setData,
+  sendDataToParent,
+  dataSend,
+}) => {
+  const [dataToSend, setDataToSend] = useState("");
 
-  const [dataToSend, setDataToSend] = useState('');
-
-  const handleButtonClick= ()=>{
-  
-  }
+  const handleButtonClick = () => {};
 
   const [showModal, setShowModal] = useState(false);
-  // console.log("Props in clid comp myDatamyData  myData ",myData);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState(" ");
   const [quantity, setQuantity] = useState(0);
-  // const setdataintoparents = () => {
-  //   setData({
-  //     username: state.username,
-  //     email: state.email,
-  //     quantity: state.quantity,
-  //   });
-  // };
-  // useEffect(() => {
-  //   setdataintoparents();
-  // }, [name, email, quantity]);
 
   function StaticExample(item) {
     // console.log("ddata shhpe in item  -----  ",item);
     setShowModal(true);
-    setName(item.name);
+    setName(item.product_name);
     setQuantity(item.instock_quantity);
-    setDescription(item.description);
+    setDescription(item.productdescription);
   }
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -49,36 +41,36 @@ const Des = ({ myData, childToParent, setData,
     quantity: "",
   });
 
-// console.log("In State Variable " ,state);
   function handleChange(evt) {
     const value = evt.target.value;
     setState({
       ...state,
       [evt.target.name]: value,
     });
-    console.log("Data can get in Form in Des component");
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      username: state.username,
-      email: state.email,
-      quantity: state.quantity,
+      order_id: '',
+      product_id: '',
+      customer_id: 'customer_id',
+      product_quantity: '10'
     };
-    console.log("data", data);
-    handleClose();
-    // sendDataToParent(data);
+
+    // return console.log(data);
+    API.post("/addProduct", data)
+      .then((response) => {
+        console.log("response pakistan", response);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
-  //   useEffect(() => {
-//     // Call the parent's callback function to send data
-//     onDataReceived(dataToSend);
-//   }, [dataToSend, onDataReceived]);
-
-
-  useEffect (()=>{
+  useEffect(() => {
     dataSend(state);
-  },[state,dataSend])
+  }, [state, dataSend]);
+
   return (
     <div
       style={{
@@ -109,18 +101,18 @@ const Des = ({ myData, childToParent, setData,
           myData.map((item, index) => (
             <div key={index}>
               <div class="gap-2">
-                <Card id="" style={{ width: "14rem", height: "13rem" }}>
+                <Card id="" style={{ width: "14rem", height: "15rem" }}>
                   <Card.Body>
                     <Card.Title class="h1 text-center">
                       <h3 style={{ textTransform: "uppercase" }}>
-                        {item.name && item.name.charAt(0)}
+                        {item.product_name.charAt(0)}
                       </h3>
                     </Card.Title>
                     <Card.Text>
-                      <h5 style={{ marginTop: "30px" }}>{item.name}</h5>
+                      <h5 style={{ marginTop: "30px" }}>{item.product_name}</h5>
                       <p style={{ marginTop: "10px", fontSize: "16px" }}>
                         {" "}
-                        {item.description}{" "}
+                        {item.productdescription}{" "}
                       </p>
                     </Card.Text>
                     <div
@@ -149,7 +141,7 @@ const Des = ({ myData, childToParent, setData,
                             marginLeft: "-10px",
                           }}
                         >
-                          Rs. {item.price}
+                          Rs. {item.product_price}
                         </p>
                       </Button>
                       <Button
