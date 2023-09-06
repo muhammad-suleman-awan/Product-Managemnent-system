@@ -5,9 +5,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { Row, Col } from "react-bootstrap";
 import { Text, View } from "react";
 import axios from "axios";
 import API from "../axios";
+import { enqueueSnackbar } from "notistack";
+
 const Des = ({
   myData,
   childToParent,
@@ -32,47 +35,65 @@ const Des = ({
     setQuantity(item.instock_quantity);
     setDescription(item.productdescription);
   }
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+    clearValues();
+  };
   const handleShow = () => setShowModal(true);
 
   const [state, setState] = React.useState({
     username: "",
     email: "",
     quantity: "",
-  });
+  }); 
 
   function handleChange(evt) {
-    const value = evt.target.value;
+    const value = evt.target.value;    
     setState({
       ...state,
       [evt.target.name]: value,
     });
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     const data = {
-      order_id: '',
-      product_id: '',
-      customer_id: 'customer_id',
-      product_quantity: '10'
+      usernameorder: state?.username,
+      useremailorrder: state?.email,
+      productquantityorder: state?.quantity,
     };
 
-    // return console.log(data);
-    API.post("/addProduct", data)
+    console.log(data);
+
+    console.log(data);
+
+    API.post("/addusernameorder", data)
       .then((response) => {
         console.log("response pakistan", response);
+        if (response?.status > 199 && response?.status < 204) {
+          clearValues();
+          enqueueSnackbar("saved successsfullyyy!!!!", { variant: "success" });
+          handleClose();
+        } else {
+          enqueueSnackbar("An error occuresd!!!!", { variant: "error" });
+        }
       })
       .catch((err) => {
         console.log("err", err);
+        
+        enqueueSnackbar("An error occuresd!!!!", { variant: "error" });
       });
-  };
+  }
+  ;
 
-  useEffect(() => {
-    dataSend(state);
-  }, [state, dataSend]);
+  const clearValues = () => {
+    setState({ username: "", email: "", quantity: "" });
+  };
 
   return (
     <div
+  
+  
+  
       style={{
         backgroundColor: "rgba(248,251,255,255)",
         width: "450%",
@@ -84,24 +105,14 @@ const Des = ({
         {" "}
         <h1>Product</h1>
       </div>
-      <div
-        style={{
-          marginLeft: "10px",
-          // background: "#f7faff",
-          width: "810px",
-          gap: "2rem",
-          display: "grid",
-          gridGap: "10px",
-          gridTemplateColumns: " 1fr 1fr 1fr",
-          gridTemplateRows: "1fr 1fr",
-        }}
-      >
+  
+      <Row>
         {myData &&
           myData.length > 0 &&
           myData.map((item, index) => (
-            <div key={index}>
-              <div class="gap-2">
-                <Card id="" style={{ width: "14rem", height: "15rem" }}>
+            <Col className="col-xl-2 col-lg-4 col-md-6 col-sm-12 col-xs-12 " key={index}>
+              <div class="gap-5">
+                <Card id="" className="gap-4 mr-5 mb-5" style={{ width: "14rem", height: "14rem",}}>
                   <Card.Body>
                     <Card.Title class="h1 text-center">
                       <h3 style={{ textTransform: "uppercase" }}>
@@ -112,7 +123,8 @@ const Des = ({
                       <h5 style={{ marginTop: "30px" }}>{item.product_name}</h5>
                       <p style={{ marginTop: "10px", fontSize: "16px" }}>
                         {" "}
-                        {item.productdescription}{" "}
+                        {item.productdescription.substring(0, 50)}
+                        {item.productdescription.substring(51, 52) && "..."}
                       </p>
                     </Card.Text>
                     <div
@@ -171,10 +183,10 @@ const Des = ({
                   </Card.Body>
                 </Card>
               </div>
-            </div>
+            </Col>
           ))}
-      </div>
-
+      </Row>
+ 
       {showModal && (
         <div
           className="modal"
@@ -188,7 +200,7 @@ const Des = ({
               <Card.Body style={{ height: "435px" }}>
                 <ListGroup variant="flush">
                   <form onSubmit={handleSubmit}>
-                    <text style={{ fontWeight: "bold" }}>Name</text>
+                    <label style={{ fontWeight: "bold" }}>Name</label>
                     <Form.Control
                       style={{
                         width: "350px",
@@ -202,22 +214,24 @@ const Des = ({
                       value={state.username}
                       onChange={handleChange}
                     />
-                    <text style={{ fontWeight: "bold" }}>Email</text>
+                    <label style={{ fontWeight: "bold" }}>Email</label>
                     <Form.Control
                       style={{
-                        width: "350px",
+                        
                         marginTop: "10px",
                         borderColor: "black",
                         marginBottom: "5px",
                       }}
                       //   type="string"
                       placeholder="Enter Email"
-                      ype="text"
+                      type="text"
                       name="email"
                       value={state.email}
                       onChange={handleChange}
                     />
-                    <text style={{ fontWeight: "bold" }}>Product Quantity</text>
+                    <label style={{ fontWeight: "bold" }}>
+                      Product Quantity
+                    </label>
                     <Form.Control
                       style={{
                         width: "350px",
@@ -234,12 +248,14 @@ const Des = ({
                     {/* </Form> */}
 
                     <div>
-                      <text style={{ fontWeight: "bold" }}> Product Name </text>
-                      <p style={{ fontSize: "18px" }}> {name}</p>
-                      <text style={{ fontWeight: "bold" }}>
+                      <label style={{ fontWeight: "bold" }}>
                         {" "}
+                        Product Name{" "}
+                      </label>
+                      <p style={{ fontSize: "18px" }}> {name}</p>
+                      <label style={{ fontWeight: "bold" }}>
                         Product Description
-                      </text>
+                      </label>
                       <p style={{ fontSize: "18px" }}> {description}</p>
                     </div>
                     <Modal.Footer style={{ marginRight: "auto" }}>
@@ -251,10 +267,9 @@ const Des = ({
                         Close
                       </Button>
                       <Button
-                        type="submit"
-                        value="Submit"
+                        type="button"
                         variant="outline-danger active"
-                        // onClick={handleClose}
+                        onClick={handleSubmit}
                         style={{ fontWeight: "bold" }}
                       >
                         {" "}

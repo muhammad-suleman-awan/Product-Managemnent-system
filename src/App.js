@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 import Sidebar from "./component/Sidebar";
@@ -9,18 +10,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Topbar from "./component/Topbar";
 import API from "./axios.jsx";
 import axios from "axios";
+import AddProduct from "./component/AddProduct";
+import OrderDisplay from "./component/OrderDisplay";
 // import AddAccount from "./component/AddAccount";
 function App() {
   const [myData, setMyData] = useState([]);
   const [isError, setIsError] = useState("");
   const [data, setData] = useState({});
 
-  const [receivedData, setReceivedData] = useState('');
+  const [receivedData, setReceivedData] = useState("");
   // call backfunction to receieved data from child
-  const receievedDataFromChild = (data) =>{
+  const receievedDataFromChild = (data) => {
     setReceivedData(data);
-    console.log("receievedDataFromChild......... ",receivedData )
-  }
+    console.log("receievedDataFromChild......... ", receivedData);
+  };
   const getData = () => {
     API.get("/show")
       .then((res) => {
@@ -39,8 +42,7 @@ function App() {
   const [receivedData1, setReceivedData1] = useState(null);
 
   const postData = () => {
-
-    API.post("/addProduct",data)
+    API.post("/addProduct", data)
       .then((response) => {
         console.log("response", response);
       })
@@ -49,89 +51,46 @@ function App() {
       });
   };
 
- const handleChildData1 = (data) => {
+  const handleChildData1 = (data) => {
     setReceivedData1(data);
-  //   console.log("Hello Data Received in Parents", data);
-  postData();
-  
- };
-
-//  const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const header = {"Access-Control-Allow-Origin":"*"}
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     axios.post('https://64b2533738e74e386d54f818.mockapi.io/form',{
-//       name:name,
-//       email:email,
-// header
-//     })
-//   };
-
+    //   console.log("Hello Data Received in Parents", data);
+    postData();
+  };
+ 
   return (
     <div>
+      <SnackbarProvider />
       <Topbar></Topbar>
+      {/* <AddProduct/> */}
       <div
         style={{
           display: "flex",
           flexWrap: "nowrap",
           width: "1265",
           height: "500px",
-          // backgroundColor: "#f7faff",
         }}
       >
-        <Sidebar></Sidebar>
-        <Des
+        <Sidebar></Sidebar> 
+        {/* <Des
           myData={myData}
           setData={setData}
-          // sendDataToParent={receievedDataFromChild}
 
           dataSend={handleChildData1}
-        ></Des>
+        ></Des> */}
+          <Routes>
+            
+              <Route index element={<Des myData={myData}
+          setData={setData} />} />
+              <Route path="/" element={<Des/>} />
+          <Route path="/Des" element={<Des myData={myData}
+          setData={setData} />} />
+          <Route path="/Des6" element={<Des myData={myData}
+          setData={setData} />} />
+         <Route path="/Addproduct" element={<AddProduct/>} />
+         <Route path="/report" element={<OrderDisplay/>} />
+          </Routes>
       </div>
     </div>
-
-
-  //   <div className="App">
-  //   <form>
-  //     <div className="mb-3">
-  //       <label for="exampleInputEmail1" className="form-label">
-  //         Name
-  //       </label>
-  //       <input
-  //         type="text"
-  //         className="form-control"
-  //         id="exampleInputEmail1"
-  //         aria-describedby="emailHelp"
-  //         onChange={(e) => setName(e.target.value)}
-  //       />
-  //       <div id="emailHelp" className="form-text">
-  //         We'll never share your name with anyone else.
-  //       </div>
-  //     </div>
-  //     <div className="mb-3">
-  //       <label for="exampleInputPassword1" className="form-label">
-  //         Email
-  //       </label>
-  //       <input
-  //         type="email"
-  //         className="form-control"
-  //         id="exampleInputPassword1"
-  //         onChange={(e) => setEmail(e.target.value)}
-  //       />
-  //     </div>
-  //     <button
-  //       type="submit"
-  //       onClick={handleSubmit}
-  //       className="btn btn-primary"
-  //     >
-  //       Submit
-  //     </button>
-  //   </form>
-  // </div>
-
-
-
   );
 }
 export default App;
