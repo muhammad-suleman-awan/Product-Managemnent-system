@@ -12,7 +12,7 @@ function Topbar() {
      >
         <Navbar  data-bs-theme="dark" >
         <Container> 
-          <Navbar.Brand href="#home"><h4 style={{color:"black"}}>Product Management</h4></Navbar.Brand> 
+          <Navbar.Brand href="#home"><h1 className='' style={{color:"black"}}>Product Management</h1></Navbar.Brand> 
           <Nav className="me-auto">
         </Nav>
         </Container>

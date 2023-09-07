@@ -54,13 +54,13 @@ const clearField =()=>{
 
 
   return (
-    <div style={{ backgroundColor: "", width: "1000px" }}>
-      <div className="mt-5">
+    <div className="mx-5 mt-2 w-25">
+      <div  >
         <h1>Add Product</h1>
       </div>
       <Form
-        className="d-flex justify-content-lg-between justify-content-sm-left align-items-center flex-column"
-        style={{ Width: "500px" }}
+        className=" mt-3 mx-5 d-flex justify-content-lg-between justify-content-sm-left align-items-center flex-column"
+ 
         onSubmit={handleSubmit}
       >
         <Form.Group className="mb-3" controlId="FormProductName">

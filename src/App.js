@@ -66,7 +66,7 @@ function App() {
         style={{
           display: "flex",
           flexWrap: "nowrap",
-          width: "1265",
+          
           height: "500px",
         }}
       >

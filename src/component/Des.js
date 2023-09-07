@@ -90,18 +90,18 @@ const Des = ({
   };
 
   return (
-    <div
+    <div className="mx-5 mt-5"
   
   
   
       style={{
         backgroundColor: "rgba(248,251,255,255)",
-        width: "450%",
+       
         height: "auto",
         marginLeft: "0px",
       }}
     >
-      <div style={{ marginLeft: "10px" }}>
+      <div style={{   }}>
         {" "}
         <h1>Product</h1>
       </div>
@@ -110,7 +110,8 @@ const Des = ({
         {myData &&
           myData.length > 0 &&
           myData.map((item, index) => (
-            <Col className="col-xl-2 col-lg-4 col-md-6 col-sm-12 col-xs-12 " key={index}>
+            <Col className="col-xl-2 col-lg-4 col-md-6 col-sm-12
+             col-xs-12 " key={index}>
               <div class="gap-5">
                 <Card id="" className="gap-4 mr-5 mb-5" style={{ width: "14rem", height: "14rem",}}>
                   <Card.Body>
@@ -203,10 +204,11 @@ const Des = ({
                     <label style={{ fontWeight: "bold" }}>Name</label>
                     <Form.Control
                       style={{
-                        width: "350px",
-                        marginTop: "5px",
+                        
+                        
+
                         borderColor: "black",
-                        marginBottom: "5px",
+                        
                       }}
                       placeholder="Enter Full Name"
                       type="text"
