@@ -1,5 +1,5 @@
 import { array } from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
@@ -10,6 +10,7 @@ import { Text, View } from "react";
 import axios from "axios";
 import API from "../axios";
 import { enqueueSnackbar } from "notistack";
+import { validEmail, checkName, quantityCheck } from "./regix.js";
 
 const Des = ({
   myData,
@@ -18,6 +19,8 @@ const Des = ({
   sendDataToParent,
   dataSend,
 }) => {
+  const inputRef = useRef(null);
+
   const [dataToSend, setDataToSend] = useState("");
 
   const handleButtonClick = () => {};
@@ -45,75 +48,143 @@ const Des = ({
     username: "",
     email: "",
     quantity: "",
-  }); 
+  });
 
   function handleChange(evt) {
-    const value = evt.target.value;    
+    const value = evt.target.value;
+    console.log("Data check for Apply input ", value);
+
     setState({
       ...state,
       [evt.target.name]: value,
     });
   }
+
+  const validateName = () => {
+    var isUserNameValid = true;
+    if (!checkName.test(state?.username)) {
+      isUserNameValid = false;
+      const element = document.getElementById("usernameget");
+      element.style.borderColor = "red";
+      let text ="Invalid Name"; 
+      document.getElementById("innertextuser").innerText=text;
+      
+    } else {
+      const element = document.getElementById("usernameget");
+      element.style.borderColor = "gray";
+      let text = "";
+      document.getElementById("innertextuser").innerText=text;
+    }
+    return isUserNameValid;
+  };
+
+  const emailValid = () => {
+    var isEmailValid = true;
+    if (!validEmail.test(state?.email)) {
+      isEmailValid = false;
+      const element = document.getElementById("userEmailid");
+      element.style.borderColor = "red";
+      let text ="Invalid email";
+      document.getElementById("innertextemail").innerText=text;
+    } else {
+      const element = document.getElementById("userEmailid");
+      element.style.borderColor = "gray";
+      let text = ""
+      document.getElementById("innertextemail").innerText=text;
+    }
+    return isEmailValid;
+  };
+
+  const quantityValidation = () => {
+    var isQualiityValid = true;
+    if (!quantityCheck.test(state?.quantity)) {
+      isQualiityValid = false;
+      const element = document.getElementById("userQuantity");
+      element.style.borderColor = "red";
+      let Text = "Quantity of Product";
+      document.getElementById("innertextquantity").innerText=Text;
+
+    } else {
+      const element = document.getElementById("userQuantity");
+      element.style.borderColor = "gray";
+      let Text = "";
+      document.getElementById("innertextquantity").innerText= Text;
+    }
+    return quantityValidation;
+  };
+
   const handleSubmit = () => {
     // e.preventDefault();
-    const data = {
-      usernameorder: state?.username,
-      useremailorrder: state?.email,
-      productquantityorder: state?.quantity,
-    };
 
-    console.log(data);
+    var isUserNameValid = validateName();
+    var isEmailValid = emailValid();
+    var isQualiityValid = quantityValidation();
 
-    console.log(data);
+    if (isUserNameValid) {
+      // alert("IN API BLOCK");
+      const data = {
+        usernameorder: state?.username,
+        useremailorrder: state?.email,
+        productquantityorder: state?.quantity,
+      };
 
-    API.post("/addusernameorder", data)
-      .then((response) => {
-        console.log("response pakistan", response);
-        if (response?.status > 199 && response?.status < 204) {
-          clearValues();
-          enqueueSnackbar("saved successsfullyyy!!!!", { variant: "success" });
-          handleClose();
-        } else {
+      API.post("/addusernameorder", data)
+        .then((response) => {
+          // console.log("response pakistan", response);
+          if (response?.status > 199 && response?.status < 204) {
+            clearValues();
+            enqueueSnackbar("saved successsfullyyy!!!!", {
+              variant: "success",
+            });
+            handleClose();
+          } else {
+            enqueueSnackbar("An error occuresd!!!!", { variant: "error" });
+          }
+        })
+        .catch((err) => {
+          console.log("err", err);
+
           enqueueSnackbar("An error occuresd!!!!", { variant: "error" });
-        }
-      })
-      .catch((err) => {
-        console.log("err", err);
-        
-        enqueueSnackbar("An error occuresd!!!!", { variant: "error" });
-      });
-  }
-  ;
-
+        });
+    }
+    return 0;
+  };
   const clearValues = () => {
     setState({ username: "", email: "", quantity: "" });
   };
 
+  const validationfield = () => {};
+
   return (
-    <div className="mx-5 mt-5"
-  
-  
-  
+    <div
+      className="mx-5 mt-5"
       style={{
         backgroundColor: "rgba(248,251,255,255)",
-       
+
         height: "auto",
         marginLeft: "0px",
       }}
     >
-      <div style={{   }}>
+      <div style={{}}>
         {" "}
         <h1>Product</h1>
       </div>
-  
+
       <Row>
         {myData &&
           myData.length > 0 &&
           myData.map((item, index) => (
-            <Col className="col-xl-2 col-lg-4 col-md-6 col-sm-12
-             col-xs-12 " key={index}>
+            <Col
+              className="col-xl-2 col-lg-4 col-md-6 col-sm-12
+             col-xs-12 "
+              key={index}
+            >
               <div class="gap-5">
-                <Card id="" className="gap-4 mr-5 mb-5" style={{ width: "14rem", height: "14rem",}}>
+                <Card
+                  id=""
+                  className="gap-4 mr-5 mb-5"
+                  style={{ width: "14rem", height: "14rem" }}
+                >
                   <Card.Body>
                     <Card.Title class="h1 text-center">
                       <h3 style={{ textTransform: "uppercase" }}>
@@ -187,7 +258,7 @@ const Des = ({
             </Col>
           ))}
       </Row>
- 
+
       {showModal && (
         <div
           className="modal"
@@ -198,28 +269,29 @@ const Des = ({
               <Modal.Title style={{ color: "white" }}>My Order</Modal.Title>
             </Modal.Header>
             <Card>
-              <Card.Body style={{ height: "435px" }}>
+              <Card.Body className="h-100" >
                 <ListGroup variant="flush">
                   <form onSubmit={handleSubmit}>
                     <label style={{ fontWeight: "bold" }}>Name</label>
+
                     <Form.Control
                       style={{
-                        
-                        
-
                         borderColor: "black",
-                        
                       }}
-                      placeholder="Enter Full Name"
+                      ref={inputRef}
+                      placeholder="Enter Full Name" 
                       type="text"
+                      id="usernameget"
                       name="username"
+                      onBlur={validateName}
                       value={state.username}
                       onChange={handleChange}
-                    />
+                    /> 
+                <p id="innertextuser"></p> 
+                  {/* <span id="error"></span><br /> */}
                     <label style={{ fontWeight: "bold" }}>Email</label>
                     <Form.Control
                       style={{
-                        
                         marginTop: "10px",
                         borderColor: "black",
                         marginBottom: "5px",
@@ -227,16 +299,19 @@ const Des = ({
                       //   type="string"
                       placeholder="Enter Email"
                       type="text"
+                      id="userEmailid"
                       name="email"
+                      onBlur={emailValid}
                       value={state.email}
                       onChange={handleChange}
                     />
+                        <p id="innertextemail"></p> 
                     <label style={{ fontWeight: "bold" }}>
                       Product Quantity
                     </label>
                     <Form.Control
                       style={{
-                        width: "350px",
+                        width: "460px",
                         marginTop: "10px",
                         marginBottom: "5px",
                         borderColor: "black",
@@ -244,9 +319,12 @@ const Des = ({
                       type="string"
                       placeholder="Enter Quantity"
                       name="quantity"
+                      id="userQuantity"
+                      onBlur={quantityValidation}
                       value={state.quantity}
                       onChange={handleChange}
                     />
+                        <p id="innertextquantity"></p> 
                     {/* </Form> */}
 
                     <div>
@@ -271,7 +349,10 @@ const Des = ({
                       <Button
                         type="button"
                         variant="outline-danger active"
-                        onClick={handleSubmit}
+                        // onClick={"validationfield();handleSubmit()"}
+                        onClick={() => {
+                          handleSubmit();
+                        }}
                         style={{ fontWeight: "bold" }}
                       >
                         {" "}
