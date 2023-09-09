@@ -49,10 +49,11 @@ const Des = ({
     email: "",
     quantity: "",
   });
+  // console.log("sdf",state.username);
 
   function handleChange(evt) {
     const value = evt.target.value;
-    console.log("Data check for Apply input ", value);
+    // console.log("Data check for Apply input ", value);
 
     setState({
       ...state,
@@ -66,51 +67,53 @@ const Des = ({
       isUserNameValid = false;
       const element = document.getElementById("usernameget");
       element.style.borderColor = "red";
-      let text ="Invalid Name"; 
-      document.getElementById("innertextuser").innerText=text;
-      
+      let text = "Invalid Name";
+      document.getElementById("innertextuser").innerText = text;
     } else {
       const element = document.getElementById("usernameget");
       element.style.borderColor = "gray";
       let text = "";
-      document.getElementById("innertextuser").innerText=text;
+      document.getElementById("innertextuser").innerText = text;
     }
     return isUserNameValid;
   };
+ 
 
   const emailValid = () => {
     var isEmailValid = true;
-    if (!validEmail.test(state?.email)) {
-      isEmailValid = false;
-      const element = document.getElementById("userEmailid");
-      element.style.borderColor = "red";
-      let text ="Invalid email";
-      document.getElementById("innertextemail").innerText=text;
+    //  console.log("validation check get data=",state?.email.trim())
+    //  console.log("State Email= ", validEmail.test(state?.email));
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    if (!emailRegex.test(state?.email)) {
+        isEmailValid = false;
+        const element = document.getElementById("userEmailid");
+        element.style.borderColor = "red";
+
+       document.getElementById("innertextemail").innerText = "Invalid email";
     } else {
       const element = document.getElementById("userEmailid");
       element.style.borderColor = "gray";
-      let text = ""
-      document.getElementById("innertextemail").innerText=text;
+       document.getElementById("innertextemail").innerText = "";
     }
     return isEmailValid;
   };
 
   const quantityValidation = () => {
-    var isQualiityValid = true;
+    var isQualiityValid = true;  
     if (!quantityCheck.test(state?.quantity)) {
       isQualiityValid = false;
       const element = document.getElementById("userQuantity");
       element.style.borderColor = "red";
-      let Text = "Quantity of Product";
-      document.getElementById("innertextquantity").innerText=Text;
 
+      document.getElementById("innertextquantity").innerText =
+        "Quantity of Product";
     } else {
       const element = document.getElementById("userQuantity");
       element.style.borderColor = "gray";
-      let Text = "";
-      document.getElementById("innertextquantity").innerText= Text;
+      document.getElementById("innertextquantity").innerText = "";
     }
-    return quantityValidation;
+    return isQualiityValid;
   };
 
   const handleSubmit = () => {
@@ -269,7 +272,7 @@ const Des = ({
               <Modal.Title style={{ color: "white" }}>My Order</Modal.Title>
             </Modal.Header>
             <Card>
-              <Card.Body className="h-100" >
+              <Card.Body className="h-100">
                 <ListGroup variant="flush">
                   <form onSubmit={handleSubmit}>
                     <label style={{ fontWeight: "bold" }}>Name</label>
@@ -279,16 +282,16 @@ const Des = ({
                         borderColor: "black",
                       }}
                       ref={inputRef}
-                      placeholder="Enter Full Name" 
+                      placeholder="Enter Full Name"
                       type="text"
                       id="usernameget"
                       name="username"
                       onBlur={validateName}
                       value={state.username}
                       onChange={handleChange}
-                    /> 
-                <p id="innertextuser"></p> 
-                  {/* <span id="error"></span><br /> */}
+                    />
+                    <p id="innertextuser" style={{ color: "red" }}></p>
+                    {/* <span id="error"></span><br /> */}
                     <label style={{ fontWeight: "bold" }}>Email</label>
                     <Form.Control
                       style={{
@@ -298,14 +301,14 @@ const Des = ({
                       }}
                       //   type="string"
                       placeholder="Enter Email"
-                      type="text"
+                      type="email"
                       id="userEmailid"
                       name="email"
                       onBlur={emailValid}
                       value={state.email}
                       onChange={handleChange}
                     />
-                        <p id="innertextemail"></p> 
+                    <p id="innertextemail" style={{ color: "red" }}></p>
                     <label style={{ fontWeight: "bold" }}>
                       Product Quantity
                     </label>
@@ -324,7 +327,7 @@ const Des = ({
                       value={state.quantity}
                       onChange={handleChange}
                     />
-                        <p id="innertextquantity"></p> 
+                    <p id="innertextquantity" style={{ color: "red" }}></p>
                     {/* </Form> */}
 
                     <div>
