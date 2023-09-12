@@ -49,7 +49,6 @@ const AddProduct = () => {
 
   return (
     <div className="">
-    
       <div>
         <Formik
           initialValues={{
@@ -72,13 +71,10 @@ const AddProduct = () => {
             touched,
             resetForm,
           }) => (
-            <Form
-              className="d-flex justify-content-lg-between justify-content-sm-left align-items-center"
-              onSubmit={handleSubmit}
-            >
-              <div className="">
-                <Form.Group className="col" controlId="FormProductName">
-                  <Form.Label   className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+            <Form className="" onSubmit={handleSubmit}>
+              <div className="row py-3">
+                <Form.Group className="col-md-6 col-xs-12" controlId="FormProductName">
+                  <Form.Label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
                     Produc Name
                   </Form.Label>
                   <Form.Control
@@ -88,36 +84,11 @@ const AddProduct = () => {
                     value={values.name}
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    className="w-50"
-                    // style={{ width: "350px", height: "50px" }}
                   ></Form.Control>
                   <Form.Text className="text-danger ">{errors.name}</Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="FormProductDes=">
-                  <Form.Label
-                    style={{ fontWeight: "bold" }}
-                    className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco"
-                  >
-                    Product Description
-                  </Form.Label>
-                  <Form.Control
-                    type="textarea"
-                    as="textarea"
-                    minRow={5}
-                    name="describation"
-                    value={values.describation}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Enter Product Description"
-                    className="w-50"
-                    style={{ height: "100px" }}
-                  ></Form.Control>
-                  <Form.Text className="text-danger ">
-                    {errors.describation}
-                  </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-0" controlId="FormProductPrice">
-                  <Form.Label   className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                <Form.Group className="col-md-6 col-xs-12  mb-0" controlId="FormProductPrice">
+                  <Form.Label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
                     Product Price
                   </Form.Label>
                   <Form.Control
@@ -128,30 +99,51 @@ const AddProduct = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     className=""
-                    // style={{ width: "350px", height: "50px" }}
                   ></Form.Control>
                   <Form.Text className="text-danger">{errors.price}</Form.Text>
                 </Form.Group>
-     
-                <Button
-                  type="submit"
-                  variant="outline-danger "
-                  style={{ width: "10vw", height: "7vh" }}
-                  // onClick={"validationfield();handleSubmit()"}
-                  className="border round-3 mt-3"
-                >
-                 <span className=" text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">  Add Product</span>
-                </Button>
-                <Button
-                  className=""
-                  // style={{ width: "10vw", height: "7vh" }}
-                  type="button"
-                  variant="outline-secondary"
-                  onClick={resetForm}
-                  
-                >
-                  Cancel
-                </Button>
+                <Form.Group className="col-md-12 col-xs-12" controlId="FormProductDes=">
+                  <Form.Label
+                    className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco"
+                  >
+                    Product Description
+                  </Form.Label>
+                  <Form.Control
+                    type="textarea"
+                    as="textarea"
+                    minRow={10}
+                    name="describation"
+                    value={values.describation}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter Product Description"
+                  ></Form.Control>
+                  <Form.Text className="text-danger ">
+                    {errors.describation}
+                  </Form.Text>
+                </Form.Group>
+
+                <div className="col-12 d-flex gap-3 py-3">
+                  <Button
+                    type="submit"
+                    variant="outline-danger "
+                    // onClick={"validationfield();handleSubmit()"}
+                    className=""
+                  >
+                    <span className=" text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                      {" "}
+                      Add Product
+                    </span>
+                  </Button>
+                  <Button
+                    className=""
+                    type="button"
+                    variant="outline-secondary"
+                    onClick={resetForm}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </Form>
           )}

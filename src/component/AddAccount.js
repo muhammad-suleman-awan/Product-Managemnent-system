@@ -18,7 +18,7 @@ const AddAccount = ({}) => {
   };
 
   return (
-    <div>
+    <div className="row">
       <Form
         style={{
           width: "250px",

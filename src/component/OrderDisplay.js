@@ -22,40 +22,50 @@ const OrderDisplay = () => {
   }, []);
 
   return (
-    <div className="w-100 p-4 mx-5">
+    <div className="">
       <div>
         <h1 className="fs-1">Order Detail</h1>
       </div>
-      <div className="px-4">
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col" className="w-25 fs-3" >Product_id</th>
-      <th scope="col" className="w-25 fs-3">Product_Name</th>
-      <th scope="col" className="w-25 fs-3">Product_Price</th>
-      <th scope="col" className="w-25 fs-3">Product_Description</th>
-    </tr>
-  </thead>
-   
-</table>
-   
-      {getOrderData.map((item,index)=>(
-        
+
     
-        <table className="table" key={index}>
-   
-          <tbody >
-            <tr className="mt-5" >
-              <th scope="row" className="w-25">{item.product_id}</th>
-              <td className="w-25">{item.product_name}</td>
-              <td className="w-25">{item.product_price}</td>
-              <td className="w-25">{item.productdescription}</td>
-            </tr>
-           
-          </tbody>
-        </table>
+     
+            <div className="row d-flex ">
+              <h6 className="col-lg-3 col-md-3 col-xs-12 bg-sm-info bg-danger text-left">Product_id</h6>
+              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-info text-left p-0">Name</h6>
+              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-success text-left p-0">Price</h6>
+              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-danger text-left p-0">Description</h6>
+              </div>
+              {/* <tr>
+                <th className="col-lg-3 col-sm-12 fs-sm-1 bg-success">
+                  <snan>Product_id</snan>{" "}
+                </th>
+                <th className="col-lg-3 col-sm-12">
+                  <span className="">Product_Name</span>{" "}
+                </th>
+                <th className="col-lg-3 col-sm-12 ">
+                  <span>Product_Price</span>{" "}
+                </th>
+                <th className="col-lg-3 col-sm-12 ">
+                  <span>Product_Description</span>{" "}
+                </th> 
+              </tr>*/}
+         
+       
+       
+
+        {getOrderData.map((item, index) => (
+          <table className="table" key={index}>
+            <tbody>
+              {/* <tr className="">
+                <th className="col-3">{item.product_id}</th>
+                <td className="col-3">{item.product_name}</td>
+                <td className="col-3">{item.product_price}</td>
+                <td className="col-3">{item.productdescription}</td>
+              </tr> */}
+            </tbody>
+          </table>
         ))}
-      </div>
+     
     </div>
   );
 };
