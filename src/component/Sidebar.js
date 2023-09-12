@@ -9,17 +9,18 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { FiMenu } from "react-icons/fi";
 
 function Sidebar() {
   const goto = useNavigate();
 
   return (
     <div>
-      <div className="d-none d-sm-block gx-0 d-flex justify-content-center w-100  py-2 px-2 gap-2 flex-lg-column flex-md-row flex-sm-row flex-xs-row">
+      <div className="d-none d-lg-block gx-0 d-flex justify-content-center w-100 gap-2 flex-lg-column flex-md-row flex-sm-row flex-xs-row">
         {/* <div class=" d-flex "> */}
-        <div className="">
+        <div className="px-1 py-1">
           <Button
-            className="w-lg-100 w-sm-25 h-25"
+            className="w-lg-100 w-md-25 w-sm-25 h-25"
             variant="outline-danger "
             onClick={() => goto("/report")}
           >
@@ -27,9 +28,9 @@ function Sidebar() {
             <span className="wrap-nowrap">Stock Detail</span>
           </Button>
         </div>
-        <div className="">
+        <div className="px-1 py-1">
           <Button
-            className="w-lg-100 w-sm-25 h-25"
+            className="w-lg-100  w-md-25 w-sm-25 h-25   "
             variant="outline-danger"
             onClick={() => goto("/Des6")}
           >
@@ -37,64 +38,66 @@ function Sidebar() {
             <span className="">Shopping</span>
           </Button>
         </div>
-        <div className="">
+        <div className="px-1 py-1">
           <Button
-            className="w-lg-100 w-sm-25 h-25"
+            className="w-lg-100    h-lg-25  w-sm-25 h-md-25"
             variant="outline-danger"
             onClick={() => goto("/Addproduct")}
           >
             <FaShoppingBag> </FaShoppingBag>{" "}
-            <span className="">Add Product</span>
+            <span className="  ">Add Product</span>
           </Button>
         </div>
 
         {/* </div> */}
       </div>
-      <div className="d-block d-sm-none justify-content-center">
-        <DropdownButton
-          className="w-100 py-1 px-1"
-          variant="outline-danger"
-          id="dropdown-basic-button"
-          title="Menu"
-        >
-          <Dropdown.Item className="bg-white">
-            <div className="">
+      <div className=" d-block d-lg-none justify-content-center">
+        <div class="dropdown">
+          <a
+            class="btn bg-danger bi-list  my-2 mx-2"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            variant="outline-danger "
+          >
+            <FiMenu></FiMenu>
+          </a>
+
+          <ul class="dropdown-menu border-1" aria-labelledby="dropdownMenuLink">
+            <li className="">
               <Button
-                className="w-100 "
+                className="w-100 h-25 wrap-nowrap  border-0 "
                 variant="outline-danger "
                 onClick={() => goto("/report")}
               >
                 <FaPersonDress></FaPersonDress>
-                <span className="wrap-nowrap">Stock Detail</span>
+                <span className="">Stock Detail</span>
               </Button>
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item className="bg-white">
-            {" "}
-            <div className="">
+            </li>
+            <li className="">
               <Button
-                className="w-100"
+                className="w-100 h-25  border-0"
                 variant="outline-danger"
                 onClick={() => goto("/Des6")}
               >
                 <AiOutlineShoppingCart></AiOutlineShoppingCart>
                 <span className="">Shopping</span>
               </Button>
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item className="bg-white" >
-            <div className="">
+            </li>
+            <li className="">
               <Button
-                className="w-100 "
+                className="w-100 h-25 border-0"
                 variant="outline-danger"
                 onClick={() => goto("/Addproduct")}
               >
                 <FaShoppingBag> </FaShoppingBag>{" "}
                 <span className="">Add Product</span>
               </Button>
-            </div>
-          </Dropdown.Item>
-        </DropdownButton>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

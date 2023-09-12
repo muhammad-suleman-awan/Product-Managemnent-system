@@ -165,48 +165,84 @@ const Des = ({
   return (
     <div>
       <div className=" ">
-          <div className="row" >
-            {myData &&
-              myData.length > 0 &&
-              myData.map((item, index) => (
-                <div  className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 py-2 px-2 px-xs-5 " key={index}>
-                  <Card className="h-100">
-                    <Card.Title className="text-center">
-                      <h3 className="text-info text-middle fs-4 fw-bold lh-sm font-family-sans-serif pt-1 text-uppercase ">
-                        {item.product_name.charAt(0)}
-                      </h3>
+        <div className="row" style={{ margin: "0px" }}>
+          {myData &&
+            myData.length > 0 &&
+            myData.map((item, index) => (
+              <div
+                className="px-2 py-2 col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 align-items-sm-center"
+                key={index}
+              >
+                <Card className="h-100">
+                  <Card.Title className="text-center">
+                    <h3 className="text-info text-middle fs-4 fw-bold lh-sm font-family-sans-serif pt-1 text-uppercase ">
+                      {item.product_name.charAt(0)}
+                    </h3>
+                  </Card.Title>
+                  <Card.Text className="text-center">
+                    <span
+                      className="text-secondary text-start
+                       nowrap fs-4 fw-bold lh-sm font-family-sans-serif text-uppercase"
+                    >
+                      {item.product_name}
+                    </span>
+                    <Card.Title className="text-start">
+                      <p className="text-secondary text-middle font-family-sans-serif pt-1 text-capitalize">
+                        {" "}
+                        {item.productdescription.substring(0, 10)}
+                        {item.productdescription.substring(11, 12) && "..."}
+                      </p>
                     </Card.Title>
-                    <Card.Text className="text-center">
-                      <span className="text-secondary text-start px-2 nowrap fs-4 fw-bold lh-sm font-family-sans-serif text-uppercase">
-                        {item.product_name}
-                      </span>
-                      <Card.Title className="text-start">
-                        <p className="text-secondary text-middle px-2 font-family-sans-serif pt-1 text-capitalize">
-                          {" "}
-                          {item.productdescription.substring(0, 10)}
-                          {item.productdescription.substring(11, 12) && "..."}
-                        </p>
-                      </Card.Title>
-                      <div className="d-flex justify-content-between align-items-center">
-                      <span className="text-secondary text-start px-0 nowrap fw-bold lh-sm font-family-sans-serif text-uppercase">
-                        Rs. {item.product_price}{" "}
-                      </span>
+
+                    {/*                     
+                      <div className="row d-flex ">
+                      <div className="col-12 text-start">
+                        <span className="text-start fw-bold">
+                          Rs.{item.product_price}
+                        </span>
+                      </div> 
+                      <div className="col col-  top-25">
+                        <Button
+                          variant="outline-danger"
+                          className="  border-0 top-0 p-0"
+                          onClick={() => StaticExample(item)}
+                        >
+                          <span className="d-flex text-wrap">
+                            Purchase
+                          </span>
+                        </Button>
+                      </div>
+                    </div> */}
+
+                    <div
+                      className="
+                      // d-flex justify-content-between align-items-center
+                      "
+                    >
+                      <div>
+                        <span
+                          className="text-secondary text-start  font-family-sans-serif
+                        "
+                        >
+                          Rs.
+                        </span>
+                        <span>{item.product_price} </span>
+                      </div>
                       <Button
                         variant="outline-danger"
-                        className=" mb-2 border-0"
+                        className="  border-0"
                         onClick={() => StaticExample(item)}
                       >
-                        <span className="text-middle fs-6  lh-sm font-family-sans-serif daco">
+                        <span className=" text-middle fs-6  lh-sm font-family-sans-serif daco">
                           Purchase
                         </span>
                       </Button>
-                      </div>
-                    </Card.Text>
-                  </Card>
-                </div>
-              ))}
-          </div>
-        
+                    </div>
+                  </Card.Text>
+                </Card>
+              </div>
+            ))}
+        </div>
       </div>
 
       <div>
@@ -219,7 +255,7 @@ const Des = ({
                 </Modal.Title>
               </Modal.Header>
               <Card>
-                <Card.Body >
+                <Card.Body>
                   <ListGroup variant="flush">
                     <form onSubmit={handleSubmit}>
                       <label className="text-secondary text-middle pb-2  fs-6 fw-bold lh-sm font-family-sans-serif daco">
@@ -281,11 +317,11 @@ const Des = ({
                         value={state.quantity}
                         onChange={handleChange}
                       />
-                      <p id="innertextquantity" ></p>
+                      <p id="innertextquantity"></p>
                       {/* </Form> */}
 
                       <div></div>
-                      <Modal.Footer >
+                      <Modal.Footer>
                         <Button
                           variant="secondary"
                           onClick={handleClose}

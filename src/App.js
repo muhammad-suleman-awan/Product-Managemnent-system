@@ -70,7 +70,7 @@ function App() {
         {/* <Sidebar></Sidebar> */}
         
         {/* <AddProduct/> */}
-        <div className="row w-100">
+        <div className="row w-100 m-0">
           
           <div className="col-lg-2 col-xs-12" >
             <Sidebar></Sidebar>
