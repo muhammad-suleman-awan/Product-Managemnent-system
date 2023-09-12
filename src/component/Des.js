@@ -10,7 +10,7 @@ import { Text, View } from "react";
 import axios from "axios";
 import API from "../axios";
 import { enqueueSnackbar } from "notistack";
-import { validEmail, checkName, quantityCheck } from "./regix.js";
+import { validEmail, checkName } from "./regix.js";
 
 const Des = ({
   myData,
@@ -19,6 +19,7 @@ const Des = ({
   sendDataToParent,
   dataSend,
 }) => {
+  // const { enqueueSnackbar } = useSnackbar();
   const inputRef = useRef(null);
 
   const [dataToSend, setDataToSend] = useState("");
@@ -63,7 +64,9 @@ const Des = ({
 
   const validateName = () => {
     var isUserNameValid = true;
-    if (!checkName.test(state?.username)) {
+    const regularExpression = /^[A-Za-z][A-Za-z0-9_]{7,29}$/i;
+
+    if (!regularExpression.test(state?.username)) {
       isUserNameValid = false;
       const element = document.getElementById("usernameget");
       element.style.borderColor = "red";
@@ -77,7 +80,6 @@ const Des = ({
     }
     return isUserNameValid;
   };
- 
 
   const emailValid = () => {
     var isEmailValid = true;
@@ -86,28 +88,30 @@ const Des = ({
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
     if (!emailRegex.test(state?.email)) {
-        isEmailValid = false;
-        const element = document.getElementById("userEmailid");
-        element.style.borderColor = "red";
+      isEmailValid = false;
+      const element = document.getElementById("userEmailid");
+      element.style.borderColor = "red";
 
-       document.getElementById("innertextemail").innerText = "Invalid email";
+      document.getElementById("innertextemail").innerText = "Invalid email";
     } else {
       const element = document.getElementById("userEmailid");
       element.style.borderColor = "gray";
-       document.getElementById("innertextemail").innerText = "";
+      document.getElementById("innertextemail").innerText = "";
     }
     return isEmailValid;
   };
 
   const quantityValidation = () => {
-    var isQualiityValid = true;  
+    var isQualiityValid = true;
+    const quantityCheck =
+      /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/;
     if (!quantityCheck.test(state?.quantity)) {
       isQualiityValid = false;
       const element = document.getElementById("userQuantity");
       element.style.borderColor = "red";
 
       document.getElementById("innertextquantity").innerText =
-        "Quantity of Product";
+        "Invalid Quantity";
     } else {
       const element = document.getElementById("userQuantity");
       element.style.borderColor = "gray";
@@ -159,216 +163,156 @@ const Des = ({
   const validationfield = () => {};
 
   return (
-    <div
-      className="mx-5 mt-5"
-      style={{
-        backgroundColor: "rgba(248,251,255,255)",
-
-        height: "auto",
-        marginLeft: "0px",
-      }}
-    >
-      <div style={{}}>
-        {" "}
-        <h1>Product</h1>
-      </div>
-
-      <Row>
-        {myData &&
-          myData.length > 0 &&
-          myData.map((item, index) => (
-            <Col
-              className="col-xl-2 col-lg-4 col-md-6 col-sm-12
-             col-xs-12 "
-              key={index}
-            >
-              <div class="gap-5">
-                <Card
-                  id=""
-                  className="gap-4 mr-5 mb-5"
-                  style={{ width: "14rem", height: "14rem" }}
-                >
-                  <Card.Body>
-                    <Card.Title class="h1 text-center">
-                      <h3 style={{ textTransform: "uppercase" }}>
+    <div>
+      <div className=" ">
+          <div className="row" >
+            {myData &&
+              myData.length > 0 &&
+              myData.map((item, index) => (
+                <div  className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 py-2 px-2 px-xs-5 " key={index}>
+                  <Card className="h-100">
+                    <Card.Title className="text-center">
+                      <h3 className="text-info text-middle fs-4 fw-bold lh-sm font-family-sans-serif pt-1 text-uppercase ">
                         {item.product_name.charAt(0)}
                       </h3>
                     </Card.Title>
-                    <Card.Text>
-                      <h5 style={{ marginTop: "30px" }}>{item.product_name}</h5>
-                      <p style={{ marginTop: "10px", fontSize: "16px" }}>
-                        {" "}
-                        {item.productdescription.substring(0, 50)}
-                        {item.productdescription.substring(51, 52) && "..."}
-                      </p>
-                    </Card.Text>
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Button
-                        style={{
-                          height: "20px",
-                          backgroundColor: "white",
-                          border: "none",
-                          color: "Black",
-                          justifyContent: "left",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            marginTop: "0px",
-                            justifyContent: "left",
-                            fontWeight: "bold",
-                            marginLeft: "-10px",
-                          }}
-                        >
-                          Rs. {item.product_price}
+                    <Card.Text className="text-center">
+                      <span className="text-secondary text-start px-2 nowrap fs-4 fw-bold lh-sm font-family-sans-serif text-uppercase">
+                        {item.product_name}
+                      </span>
+                      <Card.Title className="text-start">
+                        <p className="text-secondary text-middle px-2 font-family-sans-serif pt-1 text-capitalize">
+                          {" "}
+                          {item.productdescription.substring(0, 10)}
+                          {item.productdescription.substring(11, 12) && "..."}
                         </p>
-                      </Button>
+                      </Card.Title>
+                      <div className="d-flex justify-content-between align-items-center">
+                      <span className="text-secondary text-start px-0 nowrap fw-bold lh-sm font-family-sans-serif text-uppercase">
+                        Rs. {item.product_price}{" "}
+                      </span>
                       <Button
-                        style={{
-                          backgroundColor: "white",
-                          border: "none",
-                          color: "Black",
-                          width: "30px",
-                          height: "30px",
-                        }}
+                        variant="outline-danger"
+                        className=" mb-2 border-0"
                         onClick={() => StaticExample(item)}
                       >
-                        <h3
-                          style={{
-                            color: "red",
-                            width: "20px",
-                            height: "30px",
-                            borderBottom: "solid ",
-                            marginTop: "-5px",
-                            marginLeft: "-10px",
-                          }}
-                        >
-                          +
-                        </h3>
+                        <span className="text-middle fs-6  lh-sm font-family-sans-serif daco">
+                          Purchase
+                        </span>
                       </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </div>
-            </Col>
-          ))}
-      </Row>
+                      </div>
+                    </Card.Text>
+                  </Card>
+                </div>
+              ))}
+          </div>
+        
+      </div>
 
-      {showModal && (
-        <div
-          className="modal"
-          style={{ display: "block", position: "initial" }}
-        >
-          <Modal show={setShowModal} onHide={handleClose}>
-            <Modal.Header closeButton style={{ backgroundColor: "#dc3545" }}>
-              <Modal.Title style={{ color: "white" }}>My Order</Modal.Title>
-            </Modal.Header>
-            <Card>
-              <Card.Body className="h-100">
-                <ListGroup variant="flush">
-                  <form onSubmit={handleSubmit}>
-                    <label style={{ fontWeight: "bold" }}>Name</label>
-
-                    <Form.Control
-                      style={{
-                        borderColor: "black",
-                      }}
-                      ref={inputRef}
-                      placeholder="Enter Full Name"
-                      type="text"
-                      id="usernameget"
-                      name="username"
-                      onBlur={validateName}
-                      value={state.username}
-                      onChange={handleChange}
-                    />
-                    <p id="innertextuser" style={{ color: "red" }}></p>
-                    {/* <span id="error"></span><br /> */}
-                    <label style={{ fontWeight: "bold" }}>Email</label>
-                    <Form.Control
-                      style={{
-                        marginTop: "10px",
-                        borderColor: "black",
-                        marginBottom: "5px",
-                      }}
-                      //   type="string"
-                      placeholder="Enter Email"
-                      type="email"
-                      id="userEmailid"
-                      name="email"
-                      onBlur={emailValid}
-                      value={state.email}
-                      onChange={handleChange}
-                    />
-                    <p id="innertextemail" style={{ color: "red" }}></p>
-                    <label style={{ fontWeight: "bold" }}>
-                      Product Quantity
-                    </label>
-                    <Form.Control
-                      style={{
-                        width: "460px",
-                        marginTop: "10px",
-                        marginBottom: "5px",
-                        borderColor: "black",
-                      }}
-                      type="string"
-                      placeholder="Enter Quantity"
-                      name="quantity"
-                      id="userQuantity"
-                      onBlur={quantityValidation}
-                      value={state.quantity}
-                      onChange={handleChange}
-                    />
-                    <p id="innertextquantity" style={{ color: "red" }}></p>
-                    {/* </Form> */}
-
-                    <div>
-                      <label style={{ fontWeight: "bold" }}>
-                        {" "}
-                        Product Name{" "}
+      <div>
+        {showModal && (
+          <div>
+            <Modal show={setShowModal} onHide={handleClose}>
+              <Modal.Header closeButton className="bg-danger">
+                <Modal.Title className="text-white text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                  My Order
+                </Modal.Title>
+              </Modal.Header>
+              <Card>
+                <Card.Body >
+                  <ListGroup variant="flush">
+                    <form onSubmit={handleSubmit}>
+                      <label className="text-secondary text-middle pb-2  fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        Name
                       </label>
-                      <p style={{ fontSize: "18px" }}> {name}</p>
-                      <label style={{ fontWeight: "bold" }}>
+
+                      <Form.Control
+                        className="w-100"
+                        ref={inputRef}
+                        placeholder="Enter Full Name"
+                        type="text"
+                        id="usernameget"
+                        name="username"
+                        onBlur={validateName}
+                        value={state.username}
+                        onChange={handleChange}
+                      />
+                      <p id="innertextuser" style={{ color: "red" }}></p>
+                      {/* <span id="error"></span><br /> */}
+                      <label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        Email
+                      </label>
+                      <Form.Control
+                        className=""
+                        //   type="string"
+                        placeholder="Enter Email"
+                        type="email"
+                        id="userEmailid"
+                        name="email"
+                        onBlur={emailValid}
+                        value={state.email}
+                        onChange={handleChange}
+                      />
+                      <p id="innertextemail" style={{ color: "red" }}></p>
+                      <label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        {" "}
+                        Product{" "}
+                      </label>
+                      <p className="text-capitalize text-info text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        {name}
+                      </p>
+                      <label className=" text-capitalize text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
                         Product Description
                       </label>
-                      <p style={{ fontSize: "18px" }}> {description}</p>
-                    </div>
-                    <Modal.Footer style={{ marginRight: "auto" }}>
-                      <Button
-                        variant="secondary"
-                        onClick={handleClose}
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Close
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline-danger active"
-                        // onClick={"validationfield();handleSubmit()"}
-                        onClick={() => {
-                          handleSubmit();
-                        }}
-                        style={{ fontWeight: "bold" }}
-                      >
-                        {" "}
-                        Confrim Order
-                      </Button>
-                    </Modal.Footer>
-                  </form>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Modal>
-        </div>
-      )}
+                      <p className="text-capitalize text-info text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        {description}
+                      </p>
+
+                      <label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                        Product Quantity
+                      </label>
+                      <Form.Control
+                        className="w-100"
+                        type="string"
+                        placeholder="Enter Quantity"
+                        name="quantity"
+                        id="userQuantity"
+                        onBlur={quantityValidation}
+                        value={state.quantity}
+                        onChange={handleChange}
+                      />
+                      <p id="innertextquantity" ></p>
+                      {/* </Form> */}
+
+                      <div></div>
+                      <Modal.Footer >
+                        <Button
+                          variant="secondary"
+                          onClick={handleClose}
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Close
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline-danger active"
+                          // onClick={"validationfield();handleSubmit()"}
+                          onClick={() => {
+                            handleSubmit();
+                          }}
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Confrim Order
+                        </Button>
+                      </Modal.Footer>
+                    </form>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Modal>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -43,15 +43,13 @@ const AddProduct = () => {
       .max(50, "TOo long"),
     price: Yup.number()
       .min(3, "Too Short")
-      .max(34, "Too Long")
+
       .required("Price is required"),
   });
 
   return (
-    <div className="mx-5 mt-2 w-100 h-100">
-      <div className="mx-5 ">
-        <h1>Add Product</h1>
-      </div>
+    <div className="">
+    
       <div>
         <Formik
           initialValues={{
@@ -62,7 +60,7 @@ const AddProduct = () => {
           validationSchema={Schema}
           onSubmit={(values) => {
             console.log("values", values);
-           handleSubmit(values);
+            handleSubmit(values);
           }}
         >
           {({
@@ -72,75 +70,89 @@ const AddProduct = () => {
             handleSubmit,
             errors,
             touched,
+            resetForm,
           }) => (
             <Form
-              className=" mt-3 mx-5 d-flex justify-content-lg-between justify-content-sm-left align-items-center flex-column"
+              className="d-flex justify-content-lg-between justify-content-sm-left align-items-center"
               onSubmit={handleSubmit}
             >
-              <Form.Group className="mb-3" controlId="FormProductName">
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  Produc Name
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  placeholder="Enter Product Name"
-                  value={values.name}
-                  onBlur={handleBlur}
-                  // onChange={(e) => {
-                  //   console.log(
-                  //     e.currentTarget.name,
-                  //     e.currentTarget.value
-                  //   );
-                  //   handleChange(e);
-                  // }}
-                  onChange={handleChange}
+              <div className="">
+                <Form.Group className="col" controlId="FormProductName">
+                  <Form.Label   className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                    Produc Name
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    placeholder="Enter Product Name"
+                    value={values.name}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="w-50"
+                    // style={{ width: "350px", height: "50px" }}
+                  ></Form.Control>
+                  <Form.Text className="text-danger ">{errors.name}</Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="FormProductDes=">
+                  <Form.Label
+                    style={{ fontWeight: "bold" }}
+                    className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco"
+                  >
+                    Product Description
+                  </Form.Label>
+                  <Form.Control
+                    type="textarea"
+                    as="textarea"
+                    minRow={5}
+                    name="describation"
+                    value={values.describation}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter Product Description"
+                    className="w-50"
+                    style={{ height: "100px" }}
+                  ></Form.Control>
+                  <Form.Text className="text-danger ">
+                    {errors.describation}
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-0" controlId="FormProductPrice">
+                  <Form.Label   className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
+                    Product Price
+                  </Form.Label>
+                  <Form.Control
+                    placeholder="Enter Product Price"
+                    name="price"
+                    type="number"
+                    value={values.price}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className=""
+                    // style={{ width: "350px", height: "50px" }}
+                  ></Form.Control>
+                  <Form.Text className="text-danger">{errors.price}</Form.Text>
+                </Form.Group>
+     
+                <Button
+                  type="submit"
+                  variant="outline-danger "
+                  style={{ width: "10vw", height: "7vh" }}
+                  // onClick={"validationfield();handleSubmit()"}
+                  className="border round-3 mt-3"
+                >
+                 <span className=" text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">  Add Product</span>
+                </Button>
+                <Button
                   className=""
-                  style={{ width: "350px", height: "50px" }}
-                ></Form.Control>
-                <Form.Text className="text-danger ">{errors.name}</Form.Text>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="FormProductDes=">
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  Product Description
-                </Form.Label>
-                <Form.Control
-                  type="textarea"
-                  as="textarea"
-                  minRow={5}
-                  name="describation"
-                  value={values.describation}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter Product Description"
-                  style={{ width: "350px", height: "150px" }}
-                ></Form.Control>
-                <Form.Text className="text-danger ">
-                  {errors.describation}
-                </Form.Text>
-              </Form.Group>
-              <Form.Group className="mb3" controlId="FormProductPrice">
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  Product Price
-                </Form.Label>
-                <Form.Control
-                  placeholder="Enter Product Price"
-                  name="price"
-                  value={values.price}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  style={{ width: "350px", height: "50px" }}
-                ></Form.Control>
-                <Form.Text className="text-danger">{errors.price}</Form.Text>
-              </Form.Group>
-              <div className="d-flex w-50 gap-2 justify-content-start align-item-start mt-5 pl-0"></div>
-              <Button
-                type="submit"
-                variant="outline-danger active"
-                // onClick={"validationfield();handleSubmit()"}
-              >
-                Confrim Add Product
-              </Button>
+                  // style={{ width: "10vw", height: "7vh" }}
+                  type="button"
+                  variant="outline-secondary"
+                  onClick={resetForm}
+                  
+                >
+                  Cancel
+                </Button>
+              </div>
             </Form>
           )}
         </Formik>

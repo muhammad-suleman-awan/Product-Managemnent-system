@@ -1,6 +1,12 @@
 import React from "react";
 import { SnackbarProvider } from "notistack";
-import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  BrowserRouter,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 import Sidebar from "./component/Sidebar";
@@ -56,40 +62,42 @@ function App() {
     //   console.log("Hello Data Received in Parents", data);
     postData();
   };
- 
-  return (
-    <div>
-      <SnackbarProvider />
-      <Topbar></Topbar>
-      {/* <AddProduct/> */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "nowrap",
-          
-          height: "500px",
-        }}
-      >
-        <Sidebar></Sidebar> 
-        {/* <Des
-          myData={myData}
-          setData={setData}
 
-          dataSend={handleChildData1}
-        ></Des> */}
-          <Routes>
-            
-              <Route index element={<Des myData={myData}
-          setData={setData} />} />
-              <Route path="/" element={<Des/>} />
-          <Route path="/Des" element={<Des myData={myData}
-          setData={setData} />} />
-          <Route path="/Des6" element={<Des myData={myData}
-          setData={setData} />} />
-         <Route path="/Addproduct" element={<AddProduct/>} />
-         <Route path="/report" element={<OrderDisplay/>} />
-          </Routes>
-      </div>
+  return (
+    <div className="  ">
+      <SnackbarProvider>
+        <div ><Topbar /></div>
+        {/* <Sidebar></Sidebar> */}
+        
+        {/* <AddProduct/> */}
+        <div className="row w-100">
+          
+          <div className="col-lg-2 col-xs-12" >
+            <Sidebar></Sidebar>
+          </div>
+          <div
+            className="col-lg-10 col-xs-12"
+          >
+            <Routes>
+              <Route
+                index
+                element={<Des myData={myData} setData={setData} />}
+              />
+              <Route path="/" element={<Des />} />
+              <Route
+                path="/Des"
+                element={<Des myData={myData} setData={setData} />}
+              />
+              <Route
+                path="/Des6"
+                element={<Des myData={myData} setData={setData} />}
+              />
+              <Route path="/Addproduct" element={<AddProduct />} />
+              <Route path="/report" element={<OrderDisplay />} />
+            </Routes>
+          </div>
+        </div> 
+      </SnackbarProvider>
     </div>
   );
 }
