@@ -27,45 +27,45 @@ const OrderDisplay = () => {
         <h1 className="fs-1">Order Detail</h1>
       </div>
 
-    
-     
-            <div className="row d-flex ">
-              <h6 className="col-lg-3 col-md-3 col-xs-12 bg-sm-info bg-danger text-left">Product_id</h6>
-              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-info text-left p-0">Name</h6>
-              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-success text-left p-0">Price</h6>
-              <h6 className="col-lg-3 col-md-3 col-xs-12  bg-danger text-left p-0">Description</h6>
-              </div>
-              {/* <tr>
-                <th className="col-lg-3 col-sm-12 fs-sm-1 bg-success">
-                  <snan>Product_id</snan>{" "}
-                </th>
-                <th className="col-lg-3 col-sm-12">
-                  <span className="">Product_Name</span>{" "}
-                </th>
-                <th className="col-lg-3 col-sm-12 ">
-                  <span>Product_Price</span>{" "}
-                </th>
-                <th className="col-lg-3 col-sm-12 ">
-                  <span>Product_Description</span>{" "}
-                </th> 
-              </tr>*/}
-         
-       
-       
-
-        {getOrderData.map((item, index) => (
-          <table className="table" key={index}>
-            <tbody>
-              {/* <tr className="">
+      <div>
+        <table className="table overflow-auto">
+          <colgroup span={1} style={{ width: "15%", minWidth: "30px" }} />
+          <colgroup span={1} style={{ width: "20%", minWidth: "50px" }} />
+          <colgroup span={1} style={{ width: "15%", minWidth: "30px" }} />
+          <colgroup span={1} style={{ width: "50%", minWidth: "80px" }} />
+          {/* <col span={1}></col>
+        <col span={2}></col>
+        <col span={1}></col>
+        <col span={4}></col>
+      </colgroup> */}
+          <thead>
+            <tr>
+              <th className="fs-sm-1 bg-success">
+                <snan>Product_id</snan>{" "}
+              </th>
+              <th className="">
+                <span className="">Product_Name</span>{" "}
+              </th>
+              <th className="">
+                <span>Product_Price</span>{" "}
+              </th>
+              <th className="">
+                <span>Product_Description</span>{" "}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {getOrderData.map((item, index) => (
+              <tr className="" key={index}>
                 <th className="col-3">{item.product_id}</th>
                 <td className="col-3">{item.product_name}</td>
                 <td className="col-3">{item.product_price}</td>
                 <td className="col-3">{item.productdescription}</td>
-              </tr> */}
-            </tbody>
-          </table>
-        ))}
-     
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
