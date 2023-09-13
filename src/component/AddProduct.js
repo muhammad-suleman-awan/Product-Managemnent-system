@@ -75,12 +75,12 @@ const AddProduct = () => {
               <div className="row py-3">
                 <Form.Group className="col-md-6 col-xs-12" controlId="FormProductName">
                   <Form.Label className="text-secondary text-middle fs-6 fw-bold lh-sm font-family-sans-serif daco">
-                    Produc Name
+                    Product Title
                   </Form.Label>
                   <Form.Control
                     type="text"
                     name="name"
-                    placeholder="Enter Product Name"
+                    placeholder="Enter Product Title"
                     value={values.name}
                     onBlur={handleBlur}
                     onChange={handleChange}

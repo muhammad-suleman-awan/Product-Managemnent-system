@@ -16,45 +16,56 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="d-none d-lg-block gx-0 d-flex justify-content-center w-100 gap-2 flex-lg-column flex-md-row flex-sm-row flex-xs-row">
-        {/* <div class=" d-flex "> */}
-        <div className="px-1 py-1">
+      <row className="d-none d-lg-block px-2">
+        <div className="col-12">
           <Button
-            className="w-lg-100 w-md-25 w-sm-25 h-25"
+            className="w-lg-100 w-md-25 w-sm-25 "
             variant="outline-danger "
             onClick={() => goto("/report")}
           >
-            <FaPersonDress></FaPersonDress>
-            <span className="wrap-nowrap">Stock Detail</span>
+            <div className=" gap-1 align-items-center d-flex">
+              <span className="mx-">
+                <FaPersonDress></FaPersonDress>
+              </span>
+              <span className="wrap-nowrap">Stock Detail</span>
+            </div>
           </Button>
         </div>
-        <div className="px-1 py-1">
+        <div className="col-12">
           <Button
-            className="w-lg-100  w-md-25 w-sm-25 h-25   "
+            className="w-lg-100  w-md-25 w-sm-25"
             variant="outline-danger"
             onClick={() => goto("/Des6")}
           >
-            <AiOutlineShoppingCart></AiOutlineShoppingCart>
-            <span className="">Shopping</span>
+            <div className=" gap-1 align-items-center d-flex">
+              <AiOutlineShoppingCart></AiOutlineShoppingCart>
+              <span className="">Shopping</span>
+            </div>
           </Button>
         </div>
-        <div className="px-1 py-1">
+        <div className="col-12 col-md-12 flex-nowrap">
           <Button
-            className="w-lg-100    h-lg-25  w-sm-25 h-md-25"
+            className="w-lg-100   "
             variant="outline-danger"
             onClick={() => goto("/Addproduct")}
           >
-            <FaShoppingBag> </FaShoppingBag>{" "}
-            <span className="  ">Add Product</span>
+            <div className="gap-1 align-items-center d-flex">
+              <FaShoppingBag> </FaShoppingBag>
+              <span
+                className="d-flex wrap-nowrap  "
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Add Product
+              </span>
+            </div>
           </Button>
         </div>
+      </row>
 
-        {/* </div> */}
-      </div>
       <div className=" d-block d-lg-none justify-content-center">
-        <div class="dropdown">
+        <div class="dropdown ">
           <a
-            class="btn bg-danger bi-list  my-2 mx-2"
+            class="btn bg-secondary bi-list   my-2 mx-2"
             href="#"
             role="button"
             id="dropdownMenuLink"
@@ -72,8 +83,12 @@ function Sidebar() {
                 variant="outline-danger "
                 onClick={() => goto("/report")}
               >
-                <FaPersonDress></FaPersonDress>
-                <span className="">Stock Detail</span>
+                <div className=" gap-1 align-items-center d-flex">
+                  <span className="mx-">
+                    <FaPersonDress></FaPersonDress>
+                  </span>
+                  <span className="wrap-nowrap">Stock Detail</span>
+                </div>
               </Button>
             </li>
             <li className="">
@@ -82,8 +97,10 @@ function Sidebar() {
                 variant="outline-danger"
                 onClick={() => goto("/Des6")}
               >
-                <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                <span className="">Shopping</span>
+                <div className=" gap-1 align-items-center d-flex">
+                  <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                  <span className="">Shopping</span>
+                </div>
               </Button>
             </li>
             <li className="">
@@ -92,8 +109,10 @@ function Sidebar() {
                 variant="outline-danger"
                 onClick={() => goto("/Addproduct")}
               >
-                <FaShoppingBag> </FaShoppingBag>{" "}
-                <span className="">Add Product</span>
+                <div className=" gap-1 align-items-center d-flex">
+                  <FaShoppingBag> </FaShoppingBag>{" "}
+                  <span className="">Add Product</span>
+                </div>
               </Button>
             </li>
           </ul>
